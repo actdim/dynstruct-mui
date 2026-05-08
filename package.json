@@ -1,0 +1,131 @@
+{
+    "name": "@actdim/dynstruct-mui",
+    "version": "1.0.0",
+    "description": "MUI component wrappers for @actdim/dynstruct",
+    "author": "Pavel Borodaev",
+    "license": "Proprietary",
+    "type": "module",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/actdim/dynstruct-mui.git"
+    },
+    "bugs": {
+        "url": "https://github.com/actdim/dynstruct-mui/issues"
+    },
+    "homepage": "https://github.com/actdim/dynstruct-mui/#readme",
+    "keywords": [
+        "typescript",
+        "components",
+        "react",
+        "component-model",
+        "architecture",
+        "modularity",
+        "structure",
+        "communication"
+    ],
+    "files": [
+        "dist",
+        "docs",
+        "README.md",
+        "LICENSE"
+    ],
+    "files(src)": [
+        "src",
+        "docs",
+        "README.md",
+        "LICENSE"
+    ],
+    "exports": {
+        "./*": {
+            "import": "./dist/*.es.js",
+            "types": "./dist/*.d.ts"
+        }
+    },
+    "typesVersions": {
+        "*": {
+            "*": [
+                "dist/*.d.ts"
+            ]
+        }
+    },
+    "sideEffects": false,
+    "sideEffects?": [],
+    "packageManager": "pnpm@10.21.0",
+    "scripts": {
+        "test": "npx vitest --config=vitest.node.config.ts --no-cache",
+        "test:w": "npx vitest --config=vitest.node.config.ts --watch",
+        "test:v8": "npx vite",
+        "lint": "eslint \"./**/*.{ts,tsx}\" -f visualstudio --ext .ts,.tsx --report-unused-disable-directives --max-warnings 0",
+        "build": "tsc -b tsconfig.json --noEmit && vite build",
+        "pnpm:u": "pnpm update",
+        "pnpm:ou": "pnpm outdated",
+        "ncu:l": "ncu",
+        "ncu:u": "ncu -u",
+        "ncu:ud": "ncu -u --dev",
+        "nvm:la": "nvm list available",
+        "nvm:il": "nvm install lts",
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
+        "storybook": "storybook dev -p 6006",
+        "build-storybook": "storybook build",
+        "typecheck": "tsc -p tsconfig.json --noEmit"
+    },
+    "peerDependencies": {
+        "@actdim/dynstruct": ">=1.4.0",
+        "@actdim/msgmesh": ">=1.4.6",
+        "@actdim/utico": ">=1.2.3",
+        "@emotion/react": ">=11.14.0",
+        "@emotion/styled": ">=11.14.1",
+        "@mui/material": ">=9.0.1",
+        "http-status": ">=2.1.0",
+        "jwt-decode": ">=4.0.0",
+        "mobx": ">=6.15.0",
+        "mobx-react-lite": ">=4.1.1",
+        "mobx-utils": ">=6.1.1",
+        "path-to-regexp": ">=8.3.0",
+        "react": ">=19.2.0",
+        "react-dom": ">=19.2.0",
+        "react-router": ">=7.9.3",
+        "react-router-dom": ">=7.9.4",
+        "rxjs": ">=7.8.2",
+        "uuid": ">=13.0.0"
+    },
+    "devDependencies": {
+        "@faker-js/faker": "^10.4.0",
+        "@storybook/addon-docs": "10.0.7",
+        "@storybook/addon-onboarding": "10.0.7",
+        "@storybook/react-vite": "10.0.7",
+        "@swc/core": "^1.15.1",
+        "@types/chai": "^5.2.3",
+        "@types/mocha": "^10.0.10",
+        "@types/node": "^24.10.0",
+        "@types/react": "^19.2.14",
+        "@types/react-dom": "^19.2.3",
+        "@typescript-eslint/eslint-plugin": "^8.46.3",
+        "@typescript-eslint/parser": "^8.46.3",
+        "@vitejs/plugin-react-swc": "^4.2.1",
+        "chai": "^6.2.0",
+        "eslint": "^9.39.1",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-formatter-visualstudio": "^9.0.1",
+        "eslint-plugin-prettier": "^5.5.4",
+        "eslint-plugin-react": "^7.37.5",
+        "eslint-plugin-react-hooks": "^7.0.1",
+        "eslint-plugin-react-refresh": "^0.4.24",
+        "eslint-plugin-storybook": "10.0.7",
+        "globals": "^16.5.0",
+        "mocha": "^11.7.5",
+        "npm-check-updates": "^19.1.2",
+        "prettier": "^3.6.2",
+        "prettier-plugin-classnames": "^0.8.5",
+        "shx": "^0.4.0",
+        "storybook": "10.0.7",
+        "typescript": "^5.9.3",
+        "typescript-eslint": "^8.46.3",
+        "vite": "^7.2.2",
+        "vite-plugin-dts": "^4.5.4",
+        "vite-tsconfig-paths": "^5.1.4",
+        "vitest": "^4.0.8"
+    },
+    "dependencies": {}
+}

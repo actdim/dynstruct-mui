@@ -1,0 +1,80 @@
+import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
+import { type NavRoutes } from '@actdim/dynstruct/appDomain/commonContracts';
+import { createNavigationRoute } from '@actdim/dynstruct/appDomain/navigation';
+import {
+    ComponentContextProvider,
+    useComponentContext,
+} from '@actdim/dynstruct/componentModel/react/componentContext';
+import type {
+    BaseContext,
+    ComponentMsgHeaders,
+    ComponentRegistryContext,
+} from '@actdim/dynstruct/componentModel/contracts';
+import { $C_INHERIT, MsgBus, MsgStruct } from '@actdim/msgmesh/contracts';
+import { createMsgBus } from '@actdim/msgmesh/core';
+import { KeysOf } from '@actdim/utico/typeCore';
+import { PropsWithChildren } from 'react';
+
+export const appRoutes = {
+    page: createNavigationRoute<{
+        tag: string;
+    }>({
+        pattern: 'page',
+        element: undefined,
+    }),
+    example: createNavigationRoute<{
+        param: string;
+    }>({
+        pattern: 'example',
+        element: undefined,
+    }),
+} satisfies NavRoutes;
+
+export type AppRoutes = typeof appRoutes;
+
+export type AppMsgStruct = BaseAppMsgStruct<AppRoutes> &
+    MsgStruct<{
+
+    }>;
+
+export type AppMsgHeaders = ComponentMsgHeaders;
+
+export type AppMsgBus = MsgBus<AppMsgStruct, AppMsgHeaders>;
+
+export function createAppMsgBus() {
+    const msgBus = createMsgBus<AppMsgStruct, AppMsgHeaders>({
+        [$C_INHERIT]: {
+            mandatoryProvider: true,
+        },
+    });
+    msgBus.on({
+        channel: 'MSGBUS.ERROR',
+        topic: '/.*/',
+        callback: (msg) => {
+            console.error(msg);
+        },
+    });
+    msgBus.on({
+        channel: 'APP.ERROR',
+        topic: '/.*/',
+        callback: (msg) => {
+            console.error(msg);
+        },
+    });
+    return msgBus;
+}
+
+export const appMsgBus = createAppMsgBus();
+
+export type AppMsgChannels<TChannel extends keyof AppMsgStruct | Array<keyof AppMsgStruct>> =
+    KeysOf<AppMsgStruct, TChannel>;
+
+export type AppContext = ComponentRegistryContext<AppMsgStruct>;
+
+export const AppContextProvider = (
+    props: PropsWithChildren<{
+        value?: BaseContext<AppMsgStruct>;
+    }>,
+) => ComponentContextProvider(props);
+
+export const useAppContext = () => useComponentContext() as AppContext;
