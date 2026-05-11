@@ -60,30 +60,31 @@ export const useRadioGroup = (params: ComponentParams<Struct>): Component<Struct
             size: 'medium',
             sx: undefined,
         },
-        view: () => (
-            <FormControl
-                error={m.error}
-                disabled={m.$.isDisabled}
-                sx={m.sx}
-            >
-                {m.label && <FormLabel>{m.label}</FormLabel>}
-                <MuiRadioGroup
-                    value={m.value}
-                    onChange={(e) => m.onChange(e.target.value)}
-                    row={m.row}
-                >
-                    {m.options.map((opt) => (
-                        <FormControlLabel
-                            key={opt.value}
-                            value={opt.value}
-                            label={opt.label}
-                            control={<Radio color={m.color} size={m.size} />}
-                        />
-                    ))}
-                </MuiRadioGroup>
-                {m.helperText && <FormHelperText>{m.helperText}</FormHelperText>}
-            </FormControl>
-        ),
+        view: () => {
+            const labelId = `${c.id}-label`;
+            return (
+                <FormControl error={m.error} disabled={m.$.isDisabled} sx={m.sx}>
+                    {m.label && <FormLabel id={labelId}>{m.label}</FormLabel>}
+                    <MuiRadioGroup
+                        aria-labelledby={m.label ? labelId : undefined}
+                        name={c.id}
+                        value={m.value}
+                        onChange={(e) => m.onChange(e.target.value)}
+                        row={m.row}
+                    >
+                        {m.options.map((opt) => (
+                            <FormControlLabel
+                                key={opt.value}
+                                value={opt.value}
+                                label={opt.label}
+                                control={<Radio color={m.color} size={m.size} />}
+                            />
+                        ))}
+                    </MuiRadioGroup>
+                    {m.helperText && <FormHelperText>{m.helperText}</FormHelperText>}
+                </FormControl>
+            );
+        },
     };
 
     c = useComponent(def, params);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs as MuiTabs, Tab as MuiTab, type TabsProps as MuiTabsProps } from '@mui/material';
+import { Tabs as MuiTabs, Tab as MuiTab, Box, type TabsProps as MuiTabsProps } from '@mui/material';
 import {
     type ComponentStruct,
     type ComponentDef,
@@ -45,29 +45,51 @@ export const useTabs = (params: ComponentParams<Struct>): Component<Struct> => {
             variant: 'standard',
             sx: undefined,
         },
-        view: () => (
-            <>
-                <MuiTabs
-                    value={m.value}
-                    onChange={(_, v: string) => m.onChange(v)}
-                    orientation={m.orientation}
-                    variant={m.variant}
-                    sx={m.sx}
-                >
+        view: () =>
+            m.orientation === 'vertical' ? (
+                <Box sx={{ display: 'flex' }}>
+                    <Box sx={{ borderRight: 1, borderColor: 'divider' }}>
+                        <MuiTabs
+                            value={m.value}
+                            onChange={(_, v: string) => m.onChange(v)}
+                            orientation="vertical"
+                            variant={m.variant}
+                            sx={m.sx}
+                        >
+                            {m.tabs.map((tab) => (
+                                <MuiTab key={tab.value} value={tab.value} label={tab.label} disabled={tab.disabled} />
+                            ))}
+                        </MuiTabs>
+                    </Box>
+                    <Box sx={{ flex: 1 }}>
+                        {m.tabs.map((tab) => (
+                            <div key={tab.value} role="tabpanel" hidden={m.value !== tab.value}>
+                                {m.value === tab.value && tab.content && <tab.content />}
+                            </div>
+                        ))}
+                    </Box>
+                </Box>
+            ) : (
+                <>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                        <MuiTabs
+                            value={m.value}
+                            onChange={(_, v: string) => m.onChange(v)}
+                            variant={m.variant}
+                            sx={m.sx}
+                        >
+                            {m.tabs.map((tab) => (
+                                <MuiTab key={tab.value} value={tab.value} label={tab.label} disabled={tab.disabled} />
+                            ))}
+                        </MuiTabs>
+                    </Box>
                     {m.tabs.map((tab) => (
-                        <MuiTab key={tab.value} value={tab.value} label={tab.label} disabled={tab.disabled} />
-                    ))}
-                </MuiTabs>
-                {m.tabs.map((tab) => {
-                    const Content = tab.content;
-                    return (
                         <div key={tab.value} role="tabpanel" hidden={m.value !== tab.value}>
-                            {m.value === tab.value && Content && <Content />}
+                            {m.value === tab.value && tab.content && <tab.content />}
                         </div>
-                    );
-                })}
-            </>
-        ),
+                    ))}
+                </>
+            ),
     };
 
     c = useComponent(def, params);

@@ -71,7 +71,7 @@
         "typecheck": "tsc -p tsconfig.json --noEmit"
     },
     "peerDependencies": {
-        "@actdim/dynstruct": ">=1.4.0",
+        "@actdim/dynstruct": ">=1.4.2",
         "@actdim/msgmesh": ">=1.4.6",
         "@actdim/utico": ">=1.2.3",
         "@emotion/react": ">=11.14.0",
