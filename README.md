@@ -1,101 +1,91 @@
 # @actdim/dynstruct-mui
 
-Build scalable applications with dynamic structured components, explicit wiring, and decoupled message flow. Keep architecture clean and modular.
+MUI component wrappers for [@actdim/dynstruct](https://github.com/actdim/dynstruct). Each component is a dynstruct hook-constructor — observable props, reactive rendering, MobX-backed state out of the box.
 
 [![npm version](https://img.shields.io/npm/v/@actdim/dynstruct-mui.svg)](https://www.npmjs.com/package/@actdim/dynstruct-mui)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9+-blue.svg)](https://www.typescriptlang.org/)
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
 
-## Table of Contents
+## Components
 
-- [Overview](#overview)
-- [Features](#features)
-- [Quick Start](#quick-start)
-- [Installation](#installation)
-- [Getting Started (React)](#getting-started-react)
-- [Core Concepts](#core-concepts)
-- [More Examples (React)](#more-examples-react)
-- [Key Advantages](#key-advantages-react-examples)
-- [Architecture](#architecture)
-- [API Reference](#api-reference)
-- [Storybook Examples](#storybook-examples)
-- [Development](#development)
-- [Contributing](#contributing)
-- [License](#license)
+| Component | Import |
+|---|---|
+| Accordion | `@actdim/dynstruct-mui/Accordion` |
+| Alert | `@actdim/dynstruct-mui/Alert` |
+| Autocomplete | `@actdim/dynstruct-mui/Autocomplete` |
+| Avatar | `@actdim/dynstruct-mui/Avatar` |
+| Badge | `@actdim/dynstruct-mui/Badge` |
+| Breadcrumbs | `@actdim/dynstruct-mui/Breadcrumbs` |
+| Button | `@actdim/dynstruct-mui/Button` |
+| Card | `@actdim/dynstruct-mui/Card` |
+| Checkbox | `@actdim/dynstruct-mui/Checkbox` |
+| Chip | `@actdim/dynstruct-mui/Chip` |
+| CircularProgress | `@actdim/dynstruct-mui/CircularProgress` |
+| Dialog | `@actdim/dynstruct-mui/Dialog` |
+| Drawer | `@actdim/dynstruct-mui/Drawer` |
+| Fab | `@actdim/dynstruct-mui/Fab` |
+| IconButton | `@actdim/dynstruct-mui/IconButton` |
+| LinearProgress | `@actdim/dynstruct-mui/LinearProgress` |
+| List | `@actdim/dynstruct-mui/List` |
+| Menu | `@actdim/dynstruct-mui/Menu` |
+| Pagination | `@actdim/dynstruct-mui/Pagination` |
+| RadioGroup | `@actdim/dynstruct-mui/RadioGroup` |
+| Rating | `@actdim/dynstruct-mui/Rating` |
+| Select | `@actdim/dynstruct-mui/Select` |
+| Skeleton | `@actdim/dynstruct-mui/Skeleton` |
+| Slider | `@actdim/dynstruct-mui/Slider` |
+| Snackbar | `@actdim/dynstruct-mui/Snackbar` |
+| SpeedDial | `@actdim/dynstruct-mui/SpeedDial` |
+| Stepper | `@actdim/dynstruct-mui/Stepper` |
+| Switch | `@actdim/dynstruct-mui/Switch` |
+| Table | `@actdim/dynstruct-mui/Table` |
+| Tabs | `@actdim/dynstruct-mui/Tabs` |
+| TextField | `@actdim/dynstruct-mui/TextField` |
+| ToggleButtonGroup | `@actdim/dynstruct-mui/ToggleButtonGroup` |
+| Tooltip | `@actdim/dynstruct-mui/Tooltip` |
 
-## Overview
+## Installation
+
+```bash
+npm install @actdim/dynstruct-mui
+```
+
+Peer dependencies: `@actdim/dynstruct`, `@mui/material`, `react`, `mobx`, `mobx-react-lite` — see `package.json` for full list.
+
+## Usage
+
+```tsx
+import { useButton } from '@actdim/dynstruct-mui/Button';
+
+const saveBtn = useButton({
+    props: {
+        label: 'Save',
+        variant: 'contained',
+        onClick: () => handleSave(),
+    },
+});
+
+// In JSX:
+// <saveBtn.view />
+// or via React adapter:
+import { Button } from '@actdim/dynstruct-mui/Button';
+// <Button label="Save" variant="contained" onClick={handleSave} />
+```
 
 ## Development
 
-### Build
-
 ```bash
-npm run build
+pnpm storybook      # run Storybook
+pnpm build          # build
+pnpm typecheck      # type check
+pnpm lint           # lint
+pnpm format         # format
 ```
-
-### Run Tests
-
-```bash
-npm test
-```
-
-### Linting
-
-```bash
-npm run lint
-```
-
-### Format Code
-
-```bash
-npm run format
-```
-
-### Type Checking
-
-```bash
-npm run typecheck
-```
-
-## Package Management
-
-Use dedupe for the following packages to avoid version conflicts:
-
-- http-status
-- jwt-decode
-- mobx
-- mobx-react-lite
-- mobx-utils
-- path-to-regexp
-- react
-- react-dom
-- react-router
-- react-router-dom
-- @actdim/utico
-- @actdim/msgmesh
-- rxjs
-- uuid
-
-## Contributing
-
-This is a proprietary package. Please contact the author for contribution guidelines.
 
 ## License
 
-Proprietary - See LICENSE file for details.
+Proprietary — see [LICENSE](LICENSE) for details.
 
 ## Author
 
-Pavel Borodaev
-
-## Repository
-
-https://github.com/actdim/dynstruct-mui
-
-## Issues
-
-https://github.com/actdim/dynstruct-mui/issues
-
-## Keywords
-
-typescript, components, react, component-model, architecture, modularity, structure, communication, reactive, type-safe
+Pavel Borodaev — [github.com/actdim/dynstruct-mui](https://github.com/actdim/dynstruct-mui)

@@ -6,9 +6,9 @@ import { Tabs } from '../Tabs';
 import { AppContextProvider, appMsgBus } from './bootstrap';
 import { StorageService } from '@actdim/dynstruct/services/react/StorageService';
 
-const ContentOne: React.FC = () => <Typography p={2}>Content for Tab One</Typography>;
-const ContentTwo: React.FC = () => <Typography p={2}>Content for Tab Two</Typography>;
-const ContentThree: React.FC = () => <Typography p={2}>Content for Tab Three</Typography>;
+const ContentOne: React.FC = () => <Typography sx={{ p: 2 }}>Content for Tab One</Typography>;
+const ContentTwo: React.FC = () => <Typography sx={{ p: 2 }}>Content for Tab Two</Typography>;
+const ContentThree: React.FC = () => <Typography sx={{ p: 2 }}>Content for Tab Three</Typography>;
 
 const TABS = [
     { value: 'one', label: 'Tab One', content: ContentOne },

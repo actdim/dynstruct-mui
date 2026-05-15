@@ -1,10 +1,10 @@
 {
     "name": "@actdim/dynstruct-mui",
-    "version": "1.0.0",
+    "version": "0.9.0",
     "description": "MUI component wrappers for @actdim/dynstruct",
     "author": "Pavel Borodaev",
-    "license": "Proprietary",
-    "type": "module",
+    "license": "MIT",
+    "type": "module",    
     "repository": {
         "type": "git",
         "url": "https://github.com/actdim/dynstruct-mui.git"
@@ -48,6 +48,9 @@
             ]
         }
     },
+    "publishConfig": {
+        "access": "public"
+    },
     "sideEffects": false,
     "sideEffects?": [],
     "packageManager": "pnpm@10.21.0",
@@ -71,9 +74,9 @@
         "typecheck": "tsc -p tsconfig.json --noEmit"
     },
     "peerDependencies": {
-        "@actdim/dynstruct": ">=1.4.2",
-        "@actdim/msgmesh": ">=1.4.6",
-        "@actdim/utico": ">=1.2.3",
+        "@actdim/dynstruct": ">=1.4.4",
+        "@actdim/msgmesh": ">=1.4.8",
+        "@actdim/utico": ">=1.2.4",
         "@emotion/react": ">=11.14.0",
         "@emotion/styled": ">=11.14.1",
         "@mui/material": ">=9.0.1",

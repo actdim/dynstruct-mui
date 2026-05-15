@@ -9,6 +9,7 @@ import {
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/react';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
+import { KeyPath } from '@actdim/utico/typeCore';
 
 type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentStruct<
     TMsgStruct,
