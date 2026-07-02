@@ -7,7 +7,7 @@ import {
     type Component,
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
-import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/react';
+import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 import { KeyPath } from '@actdim/utico/typeCore';
 

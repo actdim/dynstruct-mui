@@ -7,7 +7,7 @@ import {
     type Component,
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
-import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/react';
+import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentStruct<

@@ -13,7 +13,7 @@ Every component follows this exact structure (see `src/Button.tsx` as the refere
 ```tsx
 import { type ComponentStruct, type ComponentDef, type ComponentParams,
          type Component, type ComponentModel } from '@actdim/dynstruct/componentModel/contracts';
-import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/react';
+import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 // 1. Local Struct type — generic but private to file, default = BaseAppMsgStruct
@@ -66,7 +66,7 @@ Xxx.displayName = 'Xxx';
 import { ... } from '@actdim/dynstruct/componentModel/contracts';
 
 // React utilities (useComponent, toReact)
-import { ... } from '@actdim/dynstruct/componentModel/react/react';
+import { ... } from '@actdim/dynstruct/componentModel/react/hooks';
 //                                                     ^^^^^^^^^^^
 // Note: the file lives at dist/componentModel/react/react.d.ts
 // NOT dist/componentModel/react.d.ts — that file does not exist

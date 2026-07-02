@@ -6,7 +6,7 @@ import {
     type Component,
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
-import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/react';
+import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
 import { bind, bindProp } from '@actdim/dynstruct/componentModel/core';
 import { useTextField, type TextFieldStruct } from '../../TextField';
 import { useButton, type ButtonStruct } from '../../Button';

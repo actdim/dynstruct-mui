@@ -12,7 +12,7 @@ import {
     type Component,
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
-import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/react';
+import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 export type MenuItemDef = {
@@ -29,7 +29,7 @@ type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentS
             open: boolean;
             onClose: () => void;
             items: MenuItemDef[];
-            anchorEl?: HTMLElement | null;
+            anchorEl?: HTMLElement | null; // ElementCSSInlineStyle etc to support KeyPath "anchorEl.*"
             sx?: MuiMenuProps['sx'];
         };
     }
