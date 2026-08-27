@@ -29,5 +29,7 @@ export { useSwitch, type SwitchStruct, Switch } from './Switch';
 export { useTable, type TableStruct, Table } from './Table';
 export { useTabs, type TabsStruct, Tabs } from './Tabs';
 export { useTextField, type TextFieldStruct, TextField } from './TextField';
+export { useToast, type ToastStruct, type ToastItem, Toast } from './Toast';
 export { useToggleButtonGroup, type ToggleButtonGroupStruct, ToggleButtonGroup } from './ToggleButtonGroup';
 export { useTooltip, type TooltipStruct, Tooltip } from './Tooltip';
+

@@ -54,6 +54,7 @@ export default defineConfig({
         // }),
         tsConfigPaths(),
         dts({
+            tsconfigPath: "./tsconfig.build.json",
             outDir: "dist",
             entryRoot: "src",
             include: ["src/**/*.ts", "src/**/*.tsx"],
