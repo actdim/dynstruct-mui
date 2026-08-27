@@ -1,3 +1,13 @@
+---
+protocol: along
+slug: 02-domain-model
+title: 02 Domain Model
+type: topic
+created: 2026-08-27
+updated: 2026-08-27
+tags: []
+---
+
 # @actdim/dynstruct-mui Domain Model & Component Catalog
 
 ## 1. Domain Overview
@@ -40,6 +50,6 @@
 - **`useTooltip` / `Tooltip`**: Hover tooltip popup.
 
 ## 3. Cross-Links
-- [[INDEX.md]] — Knowledge Base Root
-- [[01-architecture.md]] — System Architecture
-- [[03-setup-and-workflow.md]] — Setup, Build & Storybook Workflow
+- [[INDEX.md]] - Knowledge Base Root
+- [[01-architecture.md]] - System Architecture
+- [[03-setup-and-workflow.md]] - Setup, Build & Storybook Workflow

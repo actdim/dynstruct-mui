@@ -1,3 +1,13 @@
+---
+protocol: along
+slug: 03-setup-and-workflow
+title: 03 Setup And Workflow
+type: topic
+created: 2026-08-27
+updated: 2026-08-27
+tags: []
+---
+
 # @actdim/dynstruct-mui Setup, Build & Storybook Workflow
 
 ## 1. Prerequisites & Installation
@@ -32,6 +42,6 @@ pnpm add @actdim/dynstruct @actdim/msgmesh @actdim/utico @mui/material @emotion/
 Interactive stories exist for every wrapped Material UI component: `Button.stories.tsx`, `Dialog.stories.tsx`, `TextField.stories.tsx`, `Select.stories.tsx`, `Card.stories.tsx`, `Accordion.stories.tsx`, `Table.stories.tsx`, `Tabs.stories.tsx`, etc.
 
 ## 4. Cross-Links
-- [[INDEX.md]] — Knowledge Base Root
-- [[01-architecture.md]] — Architecture
-- [[02-domain-model.md]] — Domain Model
+- [[INDEX.md]] - Knowledge Base Root
+- [[01-architecture.md]] - Architecture
+- [[02-domain-model.md]] - Domain Model

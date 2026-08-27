@@ -1,3 +1,13 @@
+---
+protocol: along
+slug: 01-architecture
+title: 01 Architecture
+type: topic
+created: 2026-08-27
+updated: 2026-08-27
+tags: []
+---
+
 # @actdim/dynstruct-mui Architecture
 
 ## 1. System Overview
@@ -23,6 +33,6 @@
 ```
 
 ## 2. Cross-Links
-- [[INDEX.md]] — Knowledge Base Root
-- [[02-domain-model.md]] — Domain Model & Component Catalog
-- [[03-setup-and-workflow.md]] — Setup, Build & Storybook Workflow
+- [[INDEX.md]] - Knowledge Base Root
+- [[02-domain-model.md]] - Domain Model & Component Catalog
+- [[03-setup-and-workflow.md]] - Setup, Build & Storybook Workflow
