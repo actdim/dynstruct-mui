@@ -1,6 +1,6 @@
 {
     "name": "@actdim/dynstruct-mui",
-    "version": "1.5.11",
+    "version": "1.5.12",
     "description": "MUI component wrappers for @actdim/dynstruct",
     "author": "Pavel Borodaev",
     "license": "MIT",
