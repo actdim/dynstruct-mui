@@ -3,10 +3,7 @@ This folder belongs to a repository that uses the ALONG structure. The full work
 guidance + agent-context protocol live once in the nearest ancestor `AGENTS.md` (`../../../AGENTS.md`) -
 read it there. This folder keeps its OWN `.along/` state; use the nearest one.
 Only this folder's specifics follow.
-<!-- END ALONG-PROTOCOL -->
-
-
-# AI Agent Guide for `@actdim/dynstruct-mui`
+<!-- END ALONG-PROTOCOL --># AI Agent Guide for `@actdim/dynstruct-mui`
 
 MUI wrappers for `@actdim/dynstruct`. Each file wraps one MUI component into a dynstruct hook-constructor.
 
@@ -151,3 +148,11 @@ src/
 ```
 
 Import from the package: `import { useButton, ButtonStruct } from '@actdim/dynstruct-mui/Button'`.
+
+## Project specifics
+
+<!-- BEGIN ALONG-RULES -->
+See the following engineering guidelines:
+- `[languages/typescript.md](.along/rules/languages/typescript.md)`
+- `[platforms/web.md](.along/rules/platforms/web.md)`
+<!-- END ALONG-RULES -->

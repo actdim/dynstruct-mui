@@ -1,6 +1,6 @@
 {
     "name": "@actdim/dynstruct-mui",
-    "version": "1.5.12",
+    "version": "1.5.14",
     "description": "MUI component wrappers for @actdim/dynstruct",
     "author": "Pavel Borodaev",
     "license": "MIT",
@@ -27,13 +27,28 @@
         "dist",
         "docs",
         "README.md",
-        "LICENSE"
+        "LICENSE",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "llms.txt",
+        "llms-full.txt"
     ],
+    "ai": {
+        "instructions": "./AGENTS.md",
+        "docs": "./docs",
+        "llms": "./llms.txt",
+        "llms-full": "./llms-full.txt"
+    },
+    "llms": "./llms.txt",
     "files(src)": [
         "src",
         "docs",
         "README.md",
-        "LICENSE"
+        "LICENSE",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "llms.txt",
+        "llms-full.txt"
     ],
     "exports": {
         "./*": {

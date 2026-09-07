@@ -82,10 +82,14 @@ pnpm lint           # lint
 pnpm format         # format
 ```
 
+## AI-Assisted Development
+
+Developed with [Along](https://github.com/actdim/along) - a provider-agnostic context and memory system for AI coding agents.
+
 ## License
 
-Proprietary — see [LICENSE](LICENSE) for details.
+Proprietary - see [LICENSE](LICENSE) for details.
 
 ## Author
 
-Pavel Borodaev — [github.com/actdim/dynstruct-mui](https://github.com/actdim/dynstruct-mui)
+Pavel Borodaev - [github.com/actdim/dynstruct-mui](https://github.com/actdim/dynstruct-mui)

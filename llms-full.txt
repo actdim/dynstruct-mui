@@ -1,0 +1,391 @@
+# @actdim/dynstruct-mui - Full Documentation Context
+
+> Knowledge Base and documentation index for dynstruct-mui.
+
+---
+
+## Document: README.md (Overview)
+
+# @actdim/dynstruct-mui
+
+MUI component wrappers for [@actdim/dynstruct](https://github.com/actdim/dynstruct). Each component is a dynstruct hook-constructor — observable props, reactive rendering, MobX-backed state out of the box.
+
+[![npm version](https://img.shields.io/npm/v/@actdim/dynstruct-mui.svg)](https://www.npmjs.com/package/@actdim/dynstruct-mui)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9+-blue.svg)](https://www.typescriptlang.org/)
+[![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
+
+## Components
+
+| Component | Import |
+|---|---|
+| Accordion | `@actdim/dynstruct-mui/Accordion` |
+| Alert | `@actdim/dynstruct-mui/Alert` |
+| Autocomplete | `@actdim/dynstruct-mui/Autocomplete` |
+| Avatar | `@actdim/dynstruct-mui/Avatar` |
+| Badge | `@actdim/dynstruct-mui/Badge` |
+| Breadcrumbs | `@actdim/dynstruct-mui/Breadcrumbs` |
+| Button | `@actdim/dynstruct-mui/Button` |
+| Card | `@actdim/dynstruct-mui/Card` |
+| Checkbox | `@actdim/dynstruct-mui/Checkbox` |
+| Chip | `@actdim/dynstruct-mui/Chip` |
+| CircularProgress | `@actdim/dynstruct-mui/CircularProgress` |
+| Dialog | `@actdim/dynstruct-mui/Dialog` |
+| Drawer | `@actdim/dynstruct-mui/Drawer` |
+| Fab | `@actdim/dynstruct-mui/Fab` |
+| IconButton | `@actdim/dynstruct-mui/IconButton` |
+| LinearProgress | `@actdim/dynstruct-mui/LinearProgress` |
+| List | `@actdim/dynstruct-mui/List` |
+| Menu | `@actdim/dynstruct-mui/Menu` |
+| Pagination | `@actdim/dynstruct-mui/Pagination` |
+| RadioGroup | `@actdim/dynstruct-mui/RadioGroup` |
+| Rating | `@actdim/dynstruct-mui/Rating` |
+| Select | `@actdim/dynstruct-mui/Select` |
+| Skeleton | `@actdim/dynstruct-mui/Skeleton` |
+| Slider | `@actdim/dynstruct-mui/Slider` |
+| Snackbar | `@actdim/dynstruct-mui/Snackbar` |
+| SpeedDial | `@actdim/dynstruct-mui/SpeedDial` |
+| Stepper | `@actdim/dynstruct-mui/Stepper` |
+| Switch | `@actdim/dynstruct-mui/Switch` |
+| Table | `@actdim/dynstruct-mui/Table` |
+| Tabs | `@actdim/dynstruct-mui/Tabs` |
+| TextField | `@actdim/dynstruct-mui/TextField` |
+| ToggleButtonGroup | `@actdim/dynstruct-mui/ToggleButtonGroup` |
+| Tooltip | `@actdim/dynstruct-mui/Tooltip` |
+
+## Installation
+
+```bash
+npm install @actdim/dynstruct-mui
+```
+
+Peer dependencies: `@actdim/dynstruct`, `@mui/material`, `react`, `mobx`, `mobx-react-lite` — see `package.json` for full list.
+
+## Usage
+
+```tsx
+import { useButton } from '@actdim/dynstruct-mui/Button';
+
+const saveBtn = useButton({
+    props: {
+        label: 'Save',
+        variant: 'contained',
+        onClick: () => handleSave(),
+    },
+});
+
+// In JSX:
+// <saveBtn.view />
+// or via React adapter:
+import { Button } from '@actdim/dynstruct-mui/Button';
+// <Button label="Save" variant="contained" onClick={handleSave} />
+```
+
+## Development
+
+```bash
+pnpm storybook      # run Storybook
+pnpm build          # build
+pnpm typecheck      # type check
+pnpm lint           # lint
+pnpm format         # format
+```
+
+## AI-Assisted Development
+
+Developed with [Along](https://github.com/actdim/along) - a provider-agnostic context and memory system for AI coding agents.
+
+## License
+
+Proprietary - see [LICENSE](LICENSE) for details.
+
+## Author
+
+Pavel Borodaev - [github.com/actdim/dynstruct-mui](https://github.com/actdim/dynstruct-mui)
+
+---
+
+## Document: AGENTS.md (Agent Conventions & Protocol)
+
+<!-- BEGIN ALONG-PROTOCOL ref=../../../AGENTS.md (managed by along-init - do not edit by hand) -->
+This folder belongs to a repository that uses the ALONG structure. The full working
+guidance + agent-context protocol live once in the nearest ancestor `AGENTS.md` (`../../../AGENTS.md`) -
+read it there. This folder keeps its OWN `.along/` state; use the nearest one.
+Only this folder's specifics follow.
+<!-- END ALONG-PROTOCOL --># AI Agent Guide for `@actdim/dynstruct-mui`
+
+MUI wrappers for `@actdim/dynstruct`. Each file wraps one MUI component into a dynstruct hook-constructor.
+
+## Tech Stack
+
+- TypeScript · React · MobX · `@actdim/dynstruct` · `@mui/material` · Vite
+
+## Component Authoring Pattern
+
+Every component follows this exact structure (see `src/Button.tsx` as the reference):
+
+```tsx
+import { type ComponentStruct, type ComponentDef, type ComponentParams,
+         type Component, type ComponentModel } from '@actdim/dynstruct/componentModel/contracts';
+import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
+
+// 1. Local Struct type — generic but private to file, default = BaseAppMsgStruct
+type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentStruct<
+    TMsgStruct,
+    {
+        props: { /* ... */ };
+    }
+>;
+
+// 2. Hook-constructor — NOT generic, uses Struct with default
+export const useXxx = (params: ComponentParams<Struct>): Component<Struct> => {
+    let c: Component<Struct>;
+    let m: ComponentModel<Struct>;
+
+    const def: ComponentDef<Struct> = {
+        regType: 'Xxx',
+        props: { /* defaults */ },
+        view: () => ( /* JSX using m.* and m.$.* */ ),
+    };
+
+    c = useComponent(def, params);
+    m = c.model;
+    return c;
+};
+
+// 3. Exported type — concrete (non-generic) alias
+export type XxxStruct = Struct;
+
+// 4. React adapter — no explicit type params needed
+export const Xxx = toReact(useXxx);
+Xxx.displayName = 'Xxx';
+```
+
+### Rules
+
+- **`Struct` stays local** — generic with `TMsgStruct` default, never exported directly.
+- **Hook-constructor is non-generic** — `useXxx(params: ComponentParams<Struct>): Component<Struct>`.
+- **`XxxStruct` export is non-generic** — `export type XxxStruct = Struct`.
+- **`toReact` needs no type params** — `toReact(useXxx)` works because the hook is non-generic.
+- **`displayName`** — always set `Xxx.displayName = 'Xxx'` after `toReact(...)` so Storybook and React DevTools show the correct name.
+- **Disabled state** — use `m.$.isDisabled` (from `ComponentState`), not a dedicated `disabled` prop.
+- **Loading state** — use explicit `loading?: boolean` prop or wire to `m.$.pendingRequestCount > 0`.
+- **`m.$.isVisible`** — hide/show via component state, not a prop.
+
+## Import Paths
+
+```ts
+// Contracts (types only)
+import { ... } from '@actdim/dynstruct/componentModel/contracts';
+
+// React utilities (useComponent, toReact)
+import { ... } from '@actdim/dynstruct/componentModel/react/hooks';
+//                                                     ^^^^^^^^^^^
+// Note: the file lives at dist/componentModel/react/react.d.ts
+// NOT dist/componentModel/react.d.ts — that file does not exist
+
+// App domain
+import { ... } from '@actdim/dynstruct/appDomain/appContracts';
+import { ... } from '@actdim/dynstruct/appDomain/commonContracts';
+```
+
+## MUI Composition Rules
+
+Always follow the **official MUI website patterns** — use composable building blocks, not convenience shorthands:
+
+| Component | Correct pattern |
+|---|---|
+| Select | `FormControl` + `InputLabel` + `Select` + `FormHelperText` |
+| Checkbox (with label/error) | `FormControl` + `FormControlLabel` wrapping `Checkbox` + `FormHelperText` |
+| Switch (with label/error) | `FormControl` + `FormControlLabel` wrapping `Switch` + `FormHelperText` |
+| TextField | `TextField` (this IS the official atomic component, not a shorthand) |
+| Button / IconButton | Use directly |
+| Dialog | `Dialog` + `DialogTitle` + `DialogContent` + `DialogActions` |
+| Alert | `Alert` directly (`onClose` for close button) |
+
+- **`disabled`** always goes on the outermost container (`FormControl`, `Button`, etc.) — not inside, not as a duplicate.
+- **`error`** and **`helperText`** always use `FormControl error={}` + `FormHelperText` — not ad-hoc inline text.
+- **`sx`** type: when `FormControl` is the root, use `FormControlProps['sx']`, otherwise `MuiXxxProps['sx']`.
+- For `labelId` (Select, etc.) use `c.id` from the dynstruct component instance to ensure uniqueness.
+
+## Props Convention
+
+- Map MUI prop types via `MuiXxxProps['propName']` — e.g. `MuiButtonProps['variant']`.
+- Include `sx?` typed from the **outermost MUI element** (see MUI Composition Rules above).
+- Reactive `ReactNode` props (icons, content, `React.FC`) are fine — MobX handles them as observable refs.
+- Provide sensible defaults for all props in `def.props`.
+
+## Storybook Stories
+
+Every story file uses `AppContextProvider` + `StorageService` as the decorator. See `src/_stories/Button.stories.tsx` as the reference.
+
+```tsx
+import { AppContextProvider, appMsgBus } from './bootstrap';
+import { StorageService } from '@actdim/dynstruct/services/react/StorageService';
+
+const meta: Meta<typeof Xxx> = {
+    title: 'Controls/Xxx',
+    component: Xxx,
+    decorators: [
+        (Story) => (
+            <AppContextProvider value={{ msgBus: appMsgBus }}>
+                <StorageService storeName={'test'} />
+                <Story />
+            </AppContextProvider>
+        ),
+    ],
+    // ...
+};
+```
+
+- Always use `Meta<typeof Xxx>` explicit annotation (not `satisfies`) — avoids TS2742 from pnpm MUI path references.
+- `argTypes` for `startIcon`, `endIcon`, `sx`: set `control: false` (not Storybook-controllable).
+- `FullWidth` story should use `parameters: { layout: 'padded' }`.
+
+## File Layout
+
+```
+src/
+  Button.tsx            ← one file per MUI component
+  TextField.tsx
+  ...
+  _stories/
+    bootstrap.ts        ← AppMsgStruct, appMsgBus, AppContextProvider
+    Button.stories.tsx
+    ...
+```
+
+Import from the package: `import { useButton, ButtonStruct } from '@actdim/dynstruct-mui/Button'`.
+
+## Project specifics
+
+<!-- BEGIN ALONG-RULES -->
+See the following engineering guidelines:
+- `[languages/typescript.md](.along/rules/languages/typescript.md)`
+- `[platforms/web.md](.along/rules/platforms/web.md)`
+<!-- END ALONG-RULES -->
+
+---
+
+## Document: docs/topic--architecture.md (01 Architecture)
+
+# @actdim/dynstruct-mui Architecture
+
+## 1. System Overview
+
+`@actdim/dynstruct-mui` provides Material UI (MUI v5/v6) component adapters specifically engineered for the `@actdim/dynstruct` component system. It bridges Material UI widgets with the dynstruct reactive component model, two-way bindings (`bind`, `bindProp`), and message bus integration.
+
+```
++---------------------------------------------------------------------------------------------------+
+|                                     @actdim/dynstruct-mui                                         |
++---------------------------------------------------------------------------------------------------+
+|  MUI Component Adapters                                                                           |
+|  - Input & Form: TextField, Select, Autocomplete, Checkbox, Switch, RadioGroup, Slider, Rating   |
+|  - Actions: Button, IconButton, Fab, ToggleButtonGroup, SpeedDial                                 |
+|  - Layout & Containers: Card, Accordion, Dialog, Drawer, Menu, List, Table, Tabs, Stepper          |
+|  - Feedback & Display: Alert, Snackbar, CircularProgress, LinearProgress, Skeleton, Badge, Avatar|
+|  - Navigation: Breadcrumbs, Pagination, Tooltip                                                   |
++---------------------------------------------------------------------------------------------------+
+|  Dynstruct Integration Layer                                                                      |
+|  - Hook-Constructors: useButton, useTextField, useDialog, useSelect, etc.                         |
+|  - Two-way Data Binding: Seamless connection with bind(() => m.field, v => m.field = v)          |
+|  - React Exports: Standard toReact() wrappers for direct JSX usage                                |
++---------------------------------------------------------------------------------------------------+
+```
+
+## 2. Cross-Links
+- [[INDEX.md]] - Knowledge Base Root
+- [[02-domain-model.md]] - Domain Model & Component Catalog
+- [[03-setup-and-workflow.md]] - Setup, Build & Storybook Workflow
+
+---
+
+## Document: docs/topic--domain-model.md (02 Domain Model)
+
+# @actdim/dynstruct-mui Domain Model & Component Catalog
+
+## 1. Domain Overview
+
+`@actdim/dynstruct-mui` exposes typed component structures and hook-constructors wrapping `@mui/material` components.
+
+## 2. Component Catalog
+
+### 2.1. Form & Input Components
+- **`useTextField` / `TextField`**: Material UI text field with label, helperText, error state, and two-way string binding.
+- **`useSelect` / `Select`**: Select dropdown supporting single and multi-selection with options mapping.
+- **`useAutocomplete` / `Autocomplete`**: Searchable combobox and autocomplete input.
+- **`useCheckbox` / `Checkbox`**: Boolean checkbox toggle with label.
+- **`useSwitch` / `Switch`**: On/off toggle switch.
+- **`useRadioGroup` / `RadioGroup`**: Radio button selection group.
+- **`useSlider` / `Slider`**: Continuous or discrete numeric slider.
+- **`useRating` / `Rating`**: Star rating input widget.
+
+### 2.2. Actions & Buttons
+- **`useButton` / `Button`**: Primary, secondary, text, and contained button variants with click handlers.
+- **`useIconButton` / `IconButton`**: Icon-only button wrapper.
+- **`useFab` / `Fab`**: Floating Action Button.
+- **`useToggleButtonGroup` / `ToggleButtonGroup`**: Segmented button group.
+- **`useSpeedDial` / `SpeedDial`**: Expandable floating action speed dial.
+
+### 2.3. Dialogs, Drawers & Layouts
+- **`useDialog` / `Dialog`**: Modal dialog with title, content, actions, and open/close state.
+- **`useDrawer` / `Drawer`**: Side sliding drawer container.
+- **`useCard` / `Card`**: Container card with header, media, content, and action sections.
+- **`useAccordion` / `Accordion`**: Expandable panel accordion.
+- **`useTable` / `Table`**: Data table with sorting and pagination headers.
+- **`useTabs` / `Tabs`**: Tab navigation bar.
+- **`useStepper` / `Stepper`**: Multi-step wizard navigation.
+
+### 2.4. Feedback & Indicators
+- **`useAlert` / `Alert`**: Severity banner (`error`, `warning`, `info`, `success`).
+- **`useSnackbar` / `Snackbar`**: Floating toast notification with auto-hide duration.
+- **`useCircularProgress` / `CircularProgress`** & **`useLinearProgress` / `LinearProgress`**: Loading spinners.
+- **`useSkeleton` / `Skeleton`**: Content placeholder loading skeleton.
+- **`useTooltip` / `Tooltip`**: Hover tooltip popup.
+
+## 3. Cross-Links
+- [[INDEX.md]] - Knowledge Base Root
+- [[01-architecture.md]] - System Architecture
+- [[03-setup-and-workflow.md]] - Setup, Build & Storybook Workflow
+
+---
+
+## Document: docs/topic--setup-and-workflow.md (03 Setup And Workflow)
+
+# @actdim/dynstruct-mui Setup, Build & Storybook Workflow
+
+## 1. Prerequisites & Installation
+
+- **Node.js**: >= 20.0.0
+- **Package Manager**: `pnpm` (version ~10.21.0)
+- **TypeScript**: >= 5.9.3
+
+Install dependencies:
+```bash
+pnpm install
+```
+
+### Peer Dependencies
+```bash
+pnpm add @actdim/dynstruct @actdim/msgmesh @actdim/utico @mui/material @emotion/react @emotion/styled react react-dom mobx mobx-react-lite
+```
+
+## 2. Scripts & Workflows
+
+| Command | Action | Description |
+|---|---|---|
+| `pnpm run build` | `tsc -b tsconfig.json && vite build` | Compiles ESM packages with `.d.ts` declaration maps |
+| `pnpm run storybook` | `storybook dev -p 6006` | Launches Storybook with all Material UI component stories |
+| `pnpm run build-storybook` | `storybook build` | Builds static Storybook bundle |
+| `pnpm run test` | `npx vitest --config=vitest.node.config.ts --no-cache` | Runs unit tests |
+| `pnpm run typecheck` | `tsc -b tsconfig.json` | Runs strict TypeScript verification |
+| `pnpm run lint` | `eslint "./**/*.{ts,tsx}"` | Lints codebase |
+| `pnpm run format` | `prettier --write .` | Formats all files |
+
+## 3. Storybook Catalog (`src/_stories/`)
+Interactive stories exist for every wrapped Material UI component: `Button.stories.tsx`, `Dialog.stories.tsx`, `TextField.stories.tsx`, `Select.stories.tsx`, `Card.stories.tsx`, `Accordion.stories.tsx`, `Table.stories.tsx`, `Tabs.stories.tsx`, etc.
+
+## 4. Cross-Links
+- [[INDEX.md]] - Knowledge Base Root
+- [[01-architecture.md]] - Architecture
+- [[02-domain-model.md]] - Domain Model
