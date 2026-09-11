@@ -1,10 +1,11 @@
 # @actdim/dynstruct-mui
 
-MUI component wrappers for [@actdim/dynstruct](https://github.com/actdim/dynstruct). Each component is a dynstruct hook-constructor — observable props, reactive rendering, MobX-backed state out of the box.
+MUI component wrappers for [@actdim/dynstruct](https://github.com/actdim/dynstruct). Each component is a dynstruct hook-constructor - observable props, reactive rendering, MobX-backed state out of the box.
 
 [![npm version](https://img.shields.io/npm/v/@actdim/dynstruct-mui.svg)](https://www.npmjs.com/package/@actdim/dynstruct-mui)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9+-blue.svg)](https://www.typescriptlang.org/)
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ## Components
 
@@ -50,7 +51,7 @@ MUI component wrappers for [@actdim/dynstruct](https://github.com/actdim/dynstru
 npm install @actdim/dynstruct-mui
 ```
 
-Peer dependencies: `@actdim/dynstruct`, `@mui/material`, `react`, `mobx`, `mobx-react-lite` — see `package.json` for full list.
+Peer dependencies: `@actdim/dynstruct`, `@mui/material`, `react`, `mobx`, `mobx-react-lite` - see `package.json` for full list.
 
 ## Usage
 
@@ -89,6 +90,7 @@ Developed with [Along](https://github.com/actdim/along) - a provider-agnostic co
 ## License
 
 Proprietary - see [LICENSE](LICENSE) for details.
+MIT License. See [LICENSE](LICENSE) for details.
 
 ## Author
 

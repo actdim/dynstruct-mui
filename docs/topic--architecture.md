@@ -1,11 +1,10 @@
 ---
 protocol: along
-protocol_version: "2.2.5"
 slug: architecture
 title: 01 Architecture
 type: topic
 created: 2026-08-27
-updated: 2026-09-02
+updated: 2026-09-10
 tags: [architecture]
 ---
 
@@ -35,5 +34,5 @@ tags: [architecture]
 
 ## 2. Cross-Links
 - [[INDEX.md]] - Knowledge Base Root
-- [[02-domain-model.md]] - Domain Model & Component Catalog
-- [[03-setup-and-workflow.md]] - Setup, Build & Storybook Workflow
+- [[02-[domain-model](./topic--domain-model.md).md]] - Domain Model & Component Catalog
+- [[03-[setup-and-workflow](./topic--setup-and-workflow.md).md]] - Setup, Build & Storybook Workflow
