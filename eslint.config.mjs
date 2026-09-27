@@ -1,8 +1,11 @@
 import eslint from '@eslint/js'; // js
+import js from '@eslint/js';
 import { defineConfig } from 'eslint/config';
 import tsEslint from 'typescript-eslint';
 import globals from 'globals';
 
+import stylistic from '@stylistic/eslint-plugin';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import prettierPlugin from 'eslint-plugin-prettier';
@@ -10,6 +13,7 @@ import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import reactRefreshPlugin from 'eslint-plugin-react-refresh';
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
+import globals from 'globals';
 
 // cmd line: DEBUG=eslint:*
 export default defineConfig(
@@ -21,17 +25,61 @@ export default defineConfig(
     // reactHooksPlugin.configs.recommended,
     // reactRefreshPlugin.configs.recommended,
     // jsxA11yPlugin.configs.recommended,
+export default defineConfig([
     {
         files: ['**/*.ts', '**/*.tsx'],
+        ignores: [
+            '**/node_modules/**',
+            '**/dist/**',
+            '**/.out/**',
+            '**/build/**',
+            '**/coverage/**',
+            '**/docs/**',
+            '**/.storybook/**',
+            '**/jest.config.ts',
+            '**/*.d.ts',
+        ],
+    },
+    js.configs.recommended,
+    {
+        files: ['**/*.{js,mjs,cjs}'],
+        languageOptions: {
+            ecmaVersion: 'latest',
+            sourceType: 'module',
+            globals: {
+                ...globals.node,
+            },
+        },
+    },
+    {
+        files: ['**/*.{ts,tsx}'],
         plugins: {
             '@typescript-eslint': tsPlugin,
             prettier: prettierPlugin,
+            '@stylistic': stylistic,
             react: reactPlugin,
             'react-hooks': reactHooksPlugin,
             'react-refresh': reactRefreshPlugin,
             'jsx-a11y': jsxA11yPlugin,
         },
         ignores: ['dist/**', 'node_modules/**'],
+        languageOptions: {
+            parser: tsParser,
+            parserOptions: {
+                ecmaVersion: 'latest',
+                sourceType: 'module',
+                project: ['./tsconfig.json', './tsconfig.dev.json'],
+                tsconfigRootDir: import.meta.dirname,
+                ecmaFeatures: {
+                    jsx: true,
+                },
+            },
+            globals: {
+                ...globals.node,
+                ...globals.browser,
+                NodeJS: 'readonly',
+            },
+        },
         settings: {
             react: {
                 version: 'detect',
@@ -50,26 +98,83 @@ export default defineConfig(
             'no-undef': 'off',
             'react/react-in-jsx-scope': 'off',
             'react/prop-types': 'off',
+            ...tsPlugin.configs.recommended.rules,
+
+            // Pragmatic TS & JS overrides
             '@typescript-eslint/no-explicit-any': 'off',
+            '@typescript-eslint/no-unused-expressions': 'off',
+            '@typescript-eslint/consistent-type-exports': 'error',
+            '@typescript-eslint/consistent-type-imports': [
+                'error',
+                { prefer: 'type-imports', fixStyle: 'inline-type-imports' },
+            ],
+            '@typescript-eslint/no-this-alias': 'off',
+            '@typescript-eslint/no-unsafe-function-type': 'off',
+            '@typescript-eslint/no-empty-object-type': 'off',
+            '@typescript-eslint/triple-slash-reference': 'off',
+            'no-redeclare': 'off',
+            '@typescript-eslint/no-redeclare': 'off',
+            'no-empty': 'off',
+            'no-constant-condition': 'warn',
+            'no-async-promise-executor': 'warn',
+            'no-prototype-builtins': 'off',
+            'no-useless-escape': 'warn',
             '@typescript-eslint/no-unused-vars': [
                 'error',
+                'warn',
                 {
                     argsIgnorePattern: '^_',
                     varsIgnorePattern: '^_',
+                    args: 'after-used',
                 },
             ],
             '@typescript-eslint/no-misused-promises': [
+            '@typescript-eslint/ban-ts-comment': [
                 'error',
                 {
                     checksVoidReturn: false,
+                    'ts-nocheck': 'allow-with-description',
+                    minimumDescriptionLength: 3,
                 },
             ],
+            'no-undef': 'off',
+            'prefer-const': 'warn',
+            'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
+
+            // React overrides
+            'react/react-in-jsx-scope': 'off',
+            'react/prop-types': 'off',
+            'react/jsx-no-useless-fragment': 'off',
+            'react/display-name': 'off',
+            'react-hooks/rules-of-hooks': 'warn',
+            'react-hooks/exhaustive-deps': 'warn',
             'react-refresh/only-export-components': [
                 'warn',
                 {
                     allowConstantExport: true,
                 },
             ],
+
+            // Code style & formatting
+            indent: [
+                'error',
+                4,
+                {
+                    SwitchCase: 1,
+                    ignoredNodes: [
+                        'JSXAttribute',
+                        'JSXSpreadAttribute',
+                        'PropertyDefinition[decorators.length > 0]',
+                    ],
+                },
+            ],
+            semi: ['error', 'always'],
+            '@stylistic/eol-last': ['error', 'always'],
+            '@stylistic/padding-line-between-statements': [
+                'error',
+                { blankLine: 'always', prev: '*', next: 'return' },
+            ],
+            '@stylistic/function-paren-newline': 'off',
         },
         languageOptions: {
             ecmaVersion: 2022,
@@ -103,3 +208,5 @@ export default defineConfig(
     //     },
     // }
 );
+    },
+]);

@@ -85,6 +85,7 @@ export const useAutocomplete = (params: ComponentParams<Struct>): Component<Stru
 
     c = useComponent(def, params);
     m = c.model;
+
     return c;
 };
 

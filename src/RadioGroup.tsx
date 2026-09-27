@@ -62,6 +62,7 @@ export const useRadioGroup = (params: ComponentParams<Struct>): Component<Struct
         },
         view: () => {
             const labelId = `${c.id}-label`;
+
             return (
                 <FormControl error={m.error} disabled={m.$.isDisabled} sx={m.sx}>
                     {m.label && <FormLabel id={labelId}>{m.label}</FormLabel>}
@@ -89,6 +90,7 @@ export const useRadioGroup = (params: ComponentParams<Struct>): Component<Struct
 
     c = useComponent(def, params);
     m = c.model;
+
     return c;
 };
 

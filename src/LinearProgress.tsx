@@ -52,6 +52,7 @@ export const useLinearProgress = (params: ComponentParams<Struct>): Component<St
 
     c = useComponent(def, params);
     m = c.model;
+
     return c;
 };
 

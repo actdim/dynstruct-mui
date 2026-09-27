@@ -60,6 +60,7 @@ export const useFab = (params: ComponentParams<Struct>): Component<Struct> => {
 
     c = useComponent(def, params);
     m = c.model;
+
     return c;
 };
 

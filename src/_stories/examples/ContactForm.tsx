@@ -89,6 +89,7 @@ export const useContactForm = (params: ComponentParams<Struct>): Component<Struc
 
     c = useComponent(def, params);
     m = c.model;
+
     return c;
 };
 

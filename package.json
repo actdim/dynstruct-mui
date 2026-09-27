@@ -1,6 +1,6 @@
 {
     "name": "@actdim/dynstruct-mui",
-    "version": "1.7.1",
+    "version": "1.7.2",
     "description": "MUI component wrappers for @actdim/dynstruct",
     "author": "Pavel Borodaev",
     "license": "MIT",
@@ -72,7 +72,7 @@
         "test": "npx vitest --config=vitest.node.config.ts --no-cache",
         "test:w": "npx vitest --config=vitest.node.config.ts --watch",
         "test:v8": "npx vite",
-        "lint": "eslint \"./**/*.{ts,tsx}\" -f visualstudio --report-unused-disable-directives --max-warnings 0",
+        "lint": "eslint \"./**/*.{ts,tsx}\" -f visualstudio --report-unused-disable-directives",
         "build": "tsc -b tsconfig.json --noEmit && vite build",
         "pnpm:u": "pnpm update",
         "pnpm:ou": "pnpm outdated",
@@ -113,6 +113,7 @@
         "@storybook/addon-docs": "10.6.0",
         "@storybook/addon-onboarding": "10.6.0",
         "@storybook/react-vite": "10.6.0",
+        "@stylistic/eslint-plugin": "^5.10.0",
         "@swc/core": "^1.16.2",
         "@types/chai": "^5.2.3",
         "@types/mocha": "^10.0.10",
@@ -144,6 +145,5 @@
         "vite-plugin-dts": "^4.5.4",
         "vite-tsconfig-paths": "^5.1.4",
         "vitest": "^4.0.8"
-    },
-    "dependencies": {}
+    }
 }

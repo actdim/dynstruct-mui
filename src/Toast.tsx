@@ -64,10 +64,12 @@ const ToastItemView: React.FC<ToastItemProps> = ({ item, onDismiss }) => {
             const timer = setTimeout(() => {
                 onDismiss(item.id);
             }, duration);
+
             return () => {
                 clearTimeout(timer);
             };
         }
+
         return undefined;
     }, [item.id, item.autoHideDuration, onDismiss]);
 
@@ -189,6 +191,7 @@ export const useToast = (params: ComponentParams<Struct>): Component<Struct> => 
 
     c = useComponent(def, params);
     m = c.model;
+
     return c;
 };
 

@@ -55,6 +55,7 @@ export const useCircularProgress = (params: ComponentParams<Struct>): Component<
 
     c = useComponent(def, params);
     m = c.model;
+
     return c;
 };
 

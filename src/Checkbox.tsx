@@ -61,6 +61,7 @@ export const useCheckbox = (params: ComponentParams<Struct>): Component<Struct> 
                     indeterminate={m.indeterminate}
                 />
             );
+
             return (
                 <FormControl
                     error={m.error}
@@ -80,6 +81,7 @@ export const useCheckbox = (params: ComponentParams<Struct>): Component<Struct> 
 
     c = useComponent(def, params);
     m = c.model;
+
     return c;
 };
 

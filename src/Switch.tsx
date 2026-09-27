@@ -58,6 +58,7 @@ export const useSwitch = (params: ComponentParams<Struct>): Component<Struct> =>
                     size={m.size}
                 />
             );
+
             return (
                 <FormControl
                     error={m.error}
@@ -77,6 +78,7 @@ export const useSwitch = (params: ComponentParams<Struct>): Component<Struct> =>
 
     c = useComponent(def, params);
     m = c.model;
+
     return c;
 };
 

@@ -59,6 +59,7 @@ export const WithDisabledItem: Story = {
 export const Interactive: Story = {
     render: (args) => {
         const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+
         return (
             <>
                 <MuiButton variant="contained" onClick={(e) => setAnchorEl(e.currentTarget)}>

@@ -62,6 +62,7 @@ export const useSelect = (params: ComponentParams<Struct>): Component<Struct> =>
         },
         view: () => {
             const labelId = `${c.id}-label`;
+
             return (
                 <FormControl
                     fullWidth={m.fullWidth}
@@ -94,6 +95,7 @@ export const useSelect = (params: ComponentParams<Struct>): Component<Struct> =>
 
     c = useComponent(def, params);
     m = c.model;
+
     return c;
 };
 

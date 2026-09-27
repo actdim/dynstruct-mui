@@ -84,6 +84,7 @@ export const useList = (params: ComponentParams<Struct>): Component<Struct> => {
 
     c = useComponent(def, params);
     m = c.model;
+
     return c;
 };
 

@@ -76,6 +76,7 @@ export const useBreadcrumbs = (params: ComponentParams<Struct>): Component<Struc
 
     c = useComponent(def, params);
     m = c.model;
+
     return c;
 };
 

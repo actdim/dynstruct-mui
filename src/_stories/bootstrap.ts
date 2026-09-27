@@ -10,10 +10,10 @@ import type {
     ComponentMsgHeaders,
     ComponentRegistryContext,
 } from '@actdim/dynstruct/componentModel/contracts';
-import { MsgBus, MsgStruct } from '@actdim/msgmesh/contracts';
+import { type MsgBus, type MsgStruct } from '@actdim/msgmesh/contracts';
 import { createMsgBus } from '@actdim/msgmesh/core';
-import { KeysOf } from '@actdim/utico/typeCore';
-import { PropsWithChildren } from 'react';
+import { type KeysOf } from '@actdim/utico/typeCore';
+import { type PropsWithChildren } from 'react';
 
 export const appRoutes = {
     page: createNavigationRoute<{
@@ -61,6 +61,7 @@ export function createAppMsgBus() {
             console.error(msg);
         },
     });
+
     return msgBus;
 }
 

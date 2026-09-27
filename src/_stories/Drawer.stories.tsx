@@ -79,6 +79,7 @@ export const Bottom: Story = {
 export const Interactive: Story = {
     render: (args) => {
         const [open, setOpen] = React.useState(false);
+
         return (
             <>
                 <MuiButton variant="contained" onClick={() => setOpen(true)}>
