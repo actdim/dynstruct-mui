@@ -176,6 +176,28 @@ Xxx.displayName = 'Xxx';
 - **Loading state** - use explicit `loading?: boolean` prop or wire to `m.$.pendingRequestCount > 0`.
 - **`m.$.isVisible`** - hide/show via component state, not a prop.
 
+## Consuming Wrappers (priority)
+
+Inside a dynstruct component, use a wrapper as a **child**, not as inline JSX:
+
+```tsx
+import { useDialog, type DialogStruct } from '@actdim/dynstruct-mui/Dialog';
+import { bindProp } from '@actdim/dynstruct/componentModel/core';
+
+// struct: children: { addDialog: DialogStruct }
+children: {
+    addDialog: useDialog({
+        open: bindProp(() => m, 'addDialogOpen'),
+    }),
+},
+view: () => <c.children.AddDialog />,
+```
+
+- Import the hook-constructor and struct (`useXxx`, `XxxStruct`), declare the child in `children`, render `<c.children.Xxx />`.
+- Bind values with `bindProp(() => m, 'prop')` first; use `bind(get, set)` only when the getter/setter needs specific logic.
+- The `toReact` export (`Xxx`) is for plain React code and backward compatibility only - do not render `<Xxx prop={m.value} ... />` inline in a dynstruct `view`.
+- Full rules: `@actdim/dynstruct` AGENTS.md, "Composition and Performance Rules" and "Binding priority".
+
 ## Import Paths
 
 ```ts
