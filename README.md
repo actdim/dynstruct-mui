@@ -4,7 +4,6 @@ MUI component wrappers for [@actdim/dynstruct](https://github.com/actdim/dynstru
 
 [![npm version](https://img.shields.io/npm/v/@actdim/dynstruct-mui.svg)](https://www.npmjs.com/package/@actdim/dynstruct-mui)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9+-blue.svg)](https://www.typescriptlang.org/)
-[![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ## Components
@@ -89,7 +88,6 @@ Developed with [Along](https://github.com/actdim/along) - a provider-agnostic co
 
 ## License
 
-Proprietary - see [LICENSE](LICENSE) for details.
 MIT License. See [LICENSE](LICENSE) for details.
 
 ## Author
