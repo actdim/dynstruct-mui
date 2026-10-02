@@ -137,3 +137,7 @@ storybook-static
 
 *.local
 *.private
+
+# Python bytecode cache (Along lifecycle scripts)
+__pycache__/
+*.pyc
