@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import {
     Snackbar as MuiSnackbar,
     Alert as MuiAlert,
@@ -134,7 +134,7 @@ export const useToast = (params: ComponentParams<Struct>): Component<Struct> => 
                     width: 'calc(100% - 32px)',
                     pointerEvents: 'none',
                     top: vertical === 'top' ? 16 : undefined,
-                    bottom: vertical === 'bottom' ? 16 : undefined,
+                    bottom: vertical === 'bottom' ? 'calc(16px + var(--toast-bottom-offset, 0px))' : undefined,
                     left: horizontal === 'left' ? 16 : horizontal === 'center' ? '50%' : undefined,
                     right: horizontal === 'right' ? 16 : undefined,
                     transform: horizontal === 'center' ? 'translateX(-50%)' : undefined,
