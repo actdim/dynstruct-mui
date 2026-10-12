@@ -69,8 +69,9 @@ export const useAutocomplete = <T = any>(params: ComponentParams<AutocompleteStr
             variant: 'outlined',
             size: 'medium',
             // MUI slot props may hold React content (e.g. input.endAdornment): stored by reference
-            // cast: with the generic option type T, TS cannot relate ComponentProp<X> to the mapped ComponentProps type;
-            // at runtime this is the ref annotation (no initial value)
+            // cast: with the generic option type T, TS cannot relate ComponentProp<X> to the mapped ComponentProps type
+            // (`prop<X>(...)` and the getter form fail the same way); at runtime this is the ref annotation (no initial
+            // value)
             slotProps: prop({ reactive: 'ref' }) as unknown as MuiTextFieldProps['slotProps'],
             sx: undefined,
         },
