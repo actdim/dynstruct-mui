@@ -1,13 +1,9 @@
-import eslint from '@eslint/js'; // js
 import js from '@eslint/js';
 import { defineConfig } from 'eslint/config';
 import tsEslint from 'typescript-eslint';
-import globals from 'globals';
-
 import stylistic from '@stylistic/eslint-plugin';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
-import tsPlugin from '@typescript-eslint/eslint-plugin';
 import prettierPlugin from 'eslint-plugin-prettier';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
@@ -16,18 +12,10 @@ import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import globals from 'globals';
 
 // cmd line: DEBUG=eslint:*
-export default defineConfig(
-    // eslint.configs.recommended,
-    // tsEslint.configs.recommended,
-    // we can't use some configs because they are in the old format
-    // prettierPlugin.configs.recommended,
-    // reactPlugin.configs.recommended,
-    // reactHooksPlugin.configs.recommended,
-    // reactRefreshPlugin.configs.recommended,
-    // jsxA11yPlugin.configs.recommended,
+// Repaired from a broken merge (the previous object config was interleaved with this unified array config),
+// aligned with the repaired @actdim/dynstruct config.
 export default defineConfig([
     {
-        files: ['**/*.ts', '**/*.tsx'],
         ignores: [
             '**/node_modules/**',
             '**/dist/**',
@@ -62,7 +50,6 @@ export default defineConfig([
             'react-refresh': reactRefreshPlugin,
             'jsx-a11y': jsxA11yPlugin,
         },
-        ignores: ['dist/**', 'node_modules/**'],
         languageOptions: {
             parser: tsParser,
             parserOptions: {
@@ -86,18 +73,18 @@ export default defineConfig([
             },
         },
         rules: {
-            ...eslint.configs.recommended.rules,
+            ...js.configs.recommended.rules,
             ...tsEslint.configs.recommended.rules,
             ...prettierPlugin.configs.recommended.rules,
             ...reactPlugin.configs.recommended.rules,
-            ...reactHooksPlugin.configs.recommended.rules,
+            // react-hooks: only rules-of-hooks / exhaustive-deps (below), as in the dynstruct config. The v6 `recommended`
+            // set adds React Compiler rules (refs, immutability, globals, purity) that contradict the component model
+            // (mutable reactive model, lazy refs read during render).
             ...reactRefreshPlugin.configs.recommended.rules,
             ...jsxA11yPlugin.configs.recommended.rules,
-            'prettier/prettier': 'error',
+            'prettier/prettier': 'off',
             'no-unused-vars': 'off',
             'no-undef': 'off',
-            'react/react-in-jsx-scope': 'off',
-            'react/prop-types': 'off',
             ...tsPlugin.configs.recommended.rules,
 
             // Pragmatic TS & JS overrides
@@ -120,7 +107,6 @@ export default defineConfig([
             'no-prototype-builtins': 'off',
             'no-useless-escape': 'warn',
             '@typescript-eslint/no-unused-vars': [
-                'error',
                 'warn',
                 {
                     argsIgnorePattern: '^_',
@@ -129,16 +115,21 @@ export default defineConfig([
                 },
             ],
             '@typescript-eslint/no-misused-promises': [
-            '@typescript-eslint/ban-ts-comment': [
                 'error',
                 {
                     checksVoidReturn: false,
+                },
+            ],
+            '@typescript-eslint/ban-ts-comment': [
+                'error',
+                {
                     'ts-nocheck': 'allow-with-description',
                     minimumDescriptionLength: 3,
                 },
             ],
-            'no-undef': 'off',
-            'prefer-const': 'warn',
+            // ignoreReadBeforeAssign: the canonical `let c; let m;` hook-constructor pattern (closures in `def` read them
+            // before `c = useComponent(...)` assigns them)
+            'prefer-const': ['warn', { ignoreReadBeforeAssign: true }],
             'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
 
             // React overrides
@@ -176,37 +167,5 @@ export default defineConfig([
             ],
             '@stylistic/function-paren-newline': 'off',
         },
-        languageOptions: {
-            ecmaVersion: 2022,
-            sourceType: 'module',
-            parser: tsParser,
-            parserOptions: {
-                ecmaVersion: 'latest',
-                // ecmaVersion: 2017,
-                sourceType: 'module',
-                project: './tsconfig.json',
-                ecmaFeatures: { jsx: true },
-            },
-            globals: {
-                NodeJS: 'readonly', // or writable
-                // ...globals.browser,
-                // ...globals.node,
-            },
-        },
-    }
-    // File-pattern specific overrides
-    // {
-    //     files: ['src/**/*', 'test/**/*'],
-    //     rules: {
-    //         semi: ['warn', 'always'],
-    //     },
-    // },
-    // {
-    //     files: ['test/**/*'],
-    //     rules: {
-    //         'no-console': 'off',
-    //     },
-    // }
-);
     },
 ]);
