@@ -22,10 +22,11 @@ type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentS
     {
         props: {
             checked: boolean;
-            onChange: (checked: boolean) => void;
+            onChange?: (checked: boolean) => void;
             label?: string;
             helperText?: string;
             error?: boolean;
+            disabled?: boolean;
             color?: MuiCheckboxProps['color'];
             size?: MuiCheckboxProps['size'];
             indeterminate?: boolean;
@@ -42,10 +43,11 @@ export const useCheckbox = (params: ComponentParams<Struct>): Component<Struct> 
         regType: 'Checkbox',
         props: {
             checked: false,
-            onChange: () => {},
+            onChange: undefined,
             label: undefined,
             helperText: undefined,
             error: false,
+            disabled: false,
             color: 'primary',
             size: 'medium',
             indeterminate: false,
@@ -55,7 +57,12 @@ export const useCheckbox = (params: ComponentParams<Struct>): Component<Struct> 
             const checkbox = (
                 <MuiCheckbox
                     checked={m.checked}
-                    onChange={(e) => m.onChange(e.target.checked)}
+                    onChange={(e) => {
+                        m.checked = e.target.checked;
+                        if (m.onChange) {
+                            m.onChange(e.target.checked);
+                        }
+                    }}
                     color={m.color}
                     size={m.size}
                     indeterminate={m.indeterminate}
@@ -65,7 +72,7 @@ export const useCheckbox = (params: ComponentParams<Struct>): Component<Struct> 
             return (
                 <FormControl
                     error={m.error}
-                    disabled={m.$.isDisabled}
+                    disabled={m.disabled || m.$.isDisabled}
                     sx={m.sx}
                 >
                     {m.label != null ? (

@@ -8,6 +8,7 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentStruct<
@@ -39,7 +40,7 @@ export const useChip = (params: ComponentParams<Struct>): Component<Struct> => {
             variant: 'filled',
             color: 'default',
             size: 'medium',
-            icon: undefined,
+            icon: prop({ reactive: 'ref' }),
             sx: undefined,
         },
         view: () => (

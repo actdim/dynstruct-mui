@@ -12,6 +12,7 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 export type ToggleItem = {
@@ -47,7 +48,8 @@ export const useToggleButtonGroup = (params: ComponentParams<Struct>): Component
         props: {
             value: [],
             onChange: () => {},
-            items: [],
+            // item labels are React content: stored by reference, replace the array to update
+            items: prop({ initialValue: [], reactive: 'ref' }),
             exclusive: false,
             size: 'medium',
             color: 'standard',

@@ -8,11 +8,12 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 export type TabItem = {
     value: string;
-    label: string;
+    label: React.ReactNode;
     content?: React.FC;
     disabled?: boolean;
 };
@@ -22,7 +23,7 @@ type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentS
     {
         props: {
             value: string;
-            onChange: (value: string) => void;
+            onChange?: (value: string) => void;
             tabs: TabItem[];
             orientation?: MuiTabsProps['orientation'];
             variant?: MuiTabsProps['variant'];
@@ -39,42 +40,54 @@ export const useTabs = (params: ComponentParams<Struct>): Component<Struct> => {
         regType: 'Tabs',
         props: {
             value: '',
-            onChange: () => {},
-            tabs: [],
+            onChange: undefined,
+            // tab labels are React content: stored by reference, replace the array to update
+            tabs: prop({ initialValue: [], reactive: 'ref' }),
             orientation: 'horizontal',
             variant: 'standard',
             sx: undefined,
         },
-        view: () =>
-            m.orientation === 'vertical' ? (
-                <Box sx={{ display: 'flex' }}>
-                    <Box sx={{ borderRight: 1, borderColor: 'divider' }}>
-                        <MuiTabs
-                            value={m.value}
-                            onChange={(_, v: string) => m.onChange(v)}
-                            orientation="vertical"
-                            variant={m.variant}
-                            sx={m.sx}
-                        >
+        view: () => {
+            const handleTabChange = (_: React.SyntheticEvent, v: string) => {
+                m.value = v;
+                if (m.onChange) {
+                    m.onChange(v);
+                }
+            };
+
+            if (m.orientation === 'vertical') {
+                return (
+                    <Box sx={{ display: 'flex' }}>
+                        <Box sx={{ borderRight: 1, borderColor: 'divider' }}>
+                            <MuiTabs
+                                value={m.value}
+                                onChange={handleTabChange}
+                                orientation="vertical"
+                                variant={m.variant}
+                                sx={m.sx}
+                            >
+                                {m.tabs.map((tab) => (
+                                    <MuiTab key={tab.value} value={tab.value} label={tab.label} disabled={tab.disabled} />
+                                ))}
+                            </MuiTabs>
+                        </Box>
+                        <Box sx={{ flex: 1 }}>
                             {m.tabs.map((tab) => (
-                                <MuiTab key={tab.value} value={tab.value} label={tab.label} disabled={tab.disabled} />
+                                <div key={tab.value} role="tabpanel" hidden={m.value !== tab.value}>
+                                    {m.value === tab.value && tab.content && <tab.content />}
+                                </div>
                             ))}
-                        </MuiTabs>
+                        </Box>
                     </Box>
-                    <Box sx={{ flex: 1 }}>
-                        {m.tabs.map((tab) => (
-                            <div key={tab.value} role="tabpanel" hidden={m.value !== tab.value}>
-                                {m.value === tab.value && tab.content && <tab.content />}
-                            </div>
-                        ))}
-                    </Box>
-                </Box>
-            ) : (
+                );
+            }
+
+            return (
                 <>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <MuiTabs
                             value={m.value}
-                            onChange={(_, v: string) => m.onChange(v)}
+                            onChange={handleTabChange}
                             variant={m.variant}
                             sx={m.sx}
                         >
@@ -89,7 +102,8 @@ export const useTabs = (params: ComponentParams<Struct>): Component<Struct> => {
                         </div>
                     ))}
                 </>
-            ),
+            );
+        },
     };
 
     c = useComponent(def, params);

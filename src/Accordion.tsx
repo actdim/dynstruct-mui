@@ -13,6 +13,7 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentStruct<
@@ -36,11 +37,11 @@ export const useAccordion = (params: ComponentParams<Struct>): Component<Struct>
     const def: ComponentDef<Struct> = {
         regType: 'Accordion',
         props: {
-            summary: '',
-            content: () => null,
+            summary: prop({ initialValue: '', reactive: 'ref' }),
+            content: prop({ initialValue: () => null, reactive: 'ref' }),
             expanded: undefined,
             onChange: undefined,
-            expandIcon: undefined,
+            expandIcon: prop({ reactive: 'ref' }),
             sx: undefined,
         },
         view: () => (

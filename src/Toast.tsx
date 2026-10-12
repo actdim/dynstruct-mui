@@ -15,6 +15,7 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 export type ToastItem = {
@@ -105,7 +106,8 @@ export const useToast = (params: ComponentParams<Struct>): Component<Struct> => 
     const def: ComponentDef<Struct> = {
         regType: 'Toast',
         props: {
-            items: undefined,
+            // items may carry React content (action): stored by reference, replace the array to update
+            items: prop({ reactive: 'ref' }),
             onDismiss: undefined,
             open: false,
             onClose: () => {},
@@ -115,7 +117,7 @@ export const useToast = (params: ComponentParams<Struct>): Component<Struct> => 
             variant: 'filled',
             autoHideDuration: 5000,
             anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
-            action: undefined,
+            action: prop({ reactive: 'ref' }),
             sx: undefined,
             alertSx: undefined,
         },

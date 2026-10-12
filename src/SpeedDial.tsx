@@ -13,6 +13,7 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 export type SpeedDialActionDef = {
@@ -44,7 +45,7 @@ export const useSpeedDial = (params: ComponentParams<Struct>): Component<Struct>
         props: {
             ariaLabel: '',
             actions: [],
-            icon: undefined,
+            icon: prop({ reactive: 'ref' }),
             direction: 'up',
             hidden: false,
             sx: undefined,

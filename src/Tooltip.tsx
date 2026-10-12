@@ -8,6 +8,7 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 import { KeyPath } from '@actdim/utico/typeCore';
 
@@ -30,8 +31,8 @@ export const useTooltip = (params: ComponentParams<Struct>): Component<Struct> =
     const def: ComponentDef<Struct> = {
         regType: 'Tooltip',
         props: {
-            title: '',
-            children: () => null,
+            title: prop({ initialValue: '', reactive: 'ref' }),
+            children: prop({ initialValue: () => null, reactive: 'ref' }),
             placement: 'bottom',
             arrow: false,
         },

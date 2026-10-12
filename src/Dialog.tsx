@@ -14,6 +14,7 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentStruct<
@@ -22,7 +23,8 @@ type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentS
         props: {
             open: boolean;
             onClose: () => void;
-            title?: string;
+            title?: React.ReactNode;
+            subtitle?: React.ReactNode;
             content?: React.FC;
             actions?: React.FC;
             maxWidth?: MuiDialogProps['maxWidth'];
@@ -42,9 +44,10 @@ export const useDialog = (params: ComponentParams<Struct>): Component<Struct> =>
         props: {
             open: false,
             onClose: () => {},
-            title: undefined,
-            content: undefined,
-            actions: undefined,
+            title: prop({ reactive: 'ref' }),
+            subtitle: prop({ reactive: 'ref' }),
+            content: prop({ reactive: 'ref' }),
+            actions: prop({ reactive: 'ref' }),
             maxWidth: 'sm',
             fullWidth: true,
             fullScreen: false,
@@ -59,7 +62,16 @@ export const useDialog = (params: ComponentParams<Struct>): Component<Struct> =>
                 fullScreen={m.fullScreen}
                 sx={m.sx}
             >
-                {m.title && <DialogTitle>{m.title}</DialogTitle>}
+                {m.title && (
+                    <DialogTitle>
+                        <div>{m.title}</div>
+                        {m.subtitle && (
+                            <div style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 400, marginTop: 4 }}>
+                                {m.subtitle}
+                            </div>
+                        )}
+                    </DialogTitle>
+                )}
                 {m.content && (
                     <DialogContent>
                         <m.content />

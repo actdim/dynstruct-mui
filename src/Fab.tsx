@@ -8,6 +8,7 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentStruct<
@@ -33,7 +34,7 @@ export const useFab = (params: ComponentParams<Struct>): Component<Struct> => {
     const def: ComponentDef<Struct> = {
         regType: 'Fab',
         props: {
-            icon: () => null,
+            icon: prop({ initialValue: () => null, reactive: 'ref' }),
             onClick: () => {},
             ariaLabel: '',
             color: 'primary',

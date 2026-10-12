@@ -13,6 +13,7 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 export type BreadcrumbItem = {
@@ -41,7 +42,7 @@ export const useBreadcrumbs = (params: ComponentParams<Struct>): Component<Struc
         regType: 'Breadcrumbs',
         props: {
             items: [],
-            separator: undefined,
+            separator: prop({ reactive: 'ref' }),
             maxItems: 8,
             sx: undefined,
         },

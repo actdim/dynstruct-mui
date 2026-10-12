@@ -8,6 +8,7 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentStruct<
@@ -33,8 +34,8 @@ export const useBadge = (params: ComponentParams<Struct>): Component<Struct> => 
     const def: ComponentDef<Struct> = {
         regType: 'Badge',
         props: {
-            children: () => null,
-            badgeContent: undefined,
+            children: prop({ initialValue: () => null, reactive: 'ref' }),
+            badgeContent: prop({ reactive: 'ref' }),
             color: 'default',
             variant: 'standard',
             max: 99,

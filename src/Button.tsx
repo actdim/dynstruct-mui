@@ -8,13 +8,14 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentStruct<
     TMsgStruct,
     {
         props: {
-            label: string;
+            label: React.ReactNode;
             onClick: () => void;
             variant?: MuiButtonProps['variant'];
             color?: MuiButtonProps['color'];
@@ -23,6 +24,7 @@ type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentS
             startIcon?: React.ReactNode;
             endIcon?: React.ReactNode;
             loading?: boolean;
+            disabled?: boolean;
             sx?: MuiButtonProps['sx'];
         };
     }
@@ -35,15 +37,16 @@ export const useButton = (params: ComponentParams<Struct>): Component<Struct> =>
     const def: ComponentDef<Struct> = {
         regType: 'Button',
         props: {
-            label: '',
+            label: prop({ initialValue: '', reactive: 'ref' }),
             onClick: () => {},
-            variant: 'contained',
+            variant: 'text',
             color: 'primary',
             size: 'medium',
             fullWidth: false,
-            startIcon: undefined,
-            endIcon: undefined,
+            startIcon: prop({ reactive: 'ref' }),
+            endIcon: prop({ reactive: 'ref' }),
             loading: false,
+            disabled: false,
             sx: undefined,
         },
         view: () => (
@@ -52,7 +55,7 @@ export const useButton = (params: ComponentParams<Struct>): Component<Struct> =>
                 color={m.color}
                 size={m.size}
                 fullWidth={m.fullWidth}
-                disabled={m.$.isDisabled}
+                disabled={m.disabled || m.$.isDisabled}
                 loading={m.loading}
                 startIcon={m.startIcon}
                 endIcon={m.endIcon}

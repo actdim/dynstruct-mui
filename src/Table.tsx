@@ -19,6 +19,7 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 export type TableColumn = {
@@ -49,7 +50,8 @@ export const useTable = (params: ComponentParams<Struct>): Component<Struct> => 
         regType: 'Table',
         props: {
             columns: [],
-            rows: [],
+            // cells are React content: stored by reference, replace the array to update
+            rows: prop({ initialValue: [], reactive: 'ref' }),
             stickyHeader: false,
             size: 'medium',
             sx: undefined,

@@ -16,6 +16,7 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 export type ListItemDef = {
@@ -46,7 +47,8 @@ export const useList = (params: ComponentParams<Struct>): Component<Struct> => {
     const def: ComponentDef<Struct> = {
         regType: 'List',
         props: {
-            items: [],
+            // items carry React content (primary / secondary): stored by reference, replace the array to update
+            items: prop({ initialValue: [], reactive: 'ref' }),
             dense: false,
             disablePadding: false,
             sx: undefined,

@@ -22,10 +22,11 @@ type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentS
     {
         props: {
             checked: boolean;
-            onChange: (checked: boolean) => void;
+            onChange?: (checked: boolean) => void;
             label?: string;
             helperText?: string;
             error?: boolean;
+            disabled?: boolean;
             color?: MuiSwitchProps['color'];
             size?: MuiSwitchProps['size'];
             sx?: MuiFormControlProps['sx'];
@@ -41,10 +42,11 @@ export const useSwitch = (params: ComponentParams<Struct>): Component<Struct> =>
         regType: 'Switch',
         props: {
             checked: false,
-            onChange: () => {},
+            onChange: undefined,
             label: undefined,
             helperText: undefined,
             error: false,
+            disabled: false,
             color: 'primary',
             size: 'medium',
             sx: undefined,
@@ -53,7 +55,12 @@ export const useSwitch = (params: ComponentParams<Struct>): Component<Struct> =>
             const sw = (
                 <MuiSwitch
                     checked={m.checked}
-                    onChange={(e) => m.onChange(e.target.checked)}
+                    onChange={(e) => {
+                        m.checked = e.target.checked;
+                        if (m.onChange) {
+                            m.onChange(e.target.checked);
+                        }
+                    }}
                     color={m.color}
                     size={m.size}
                 />
@@ -62,7 +69,7 @@ export const useSwitch = (params: ComponentParams<Struct>): Component<Struct> =>
             return (
                 <FormControl
                     error={m.error}
-                    disabled={m.$.isDisabled}
+                    disabled={m.disabled || m.$.isDisabled}
                     sx={m.sx}
                 >
                     {m.label != null ? (

@@ -8,6 +8,7 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentStruct<
@@ -16,6 +17,8 @@ type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentS
         props: {
             onClick: () => void;
             icon: React.ReactNode;
+            title?: string;
+            disabled?: boolean;
             color?: MuiIconButtonProps['color'];
             size?: MuiIconButtonProps['size'];
             edge?: MuiIconButtonProps['edge'];
@@ -34,7 +37,9 @@ export const useIconButton = (params: ComponentParams<Struct>): Component<Struct
         regType: 'IconButton',
         props: {
             onClick: () => {},
-            icon: null,
+            icon: prop({ initialValue: null, reactive: 'ref' }),
+            title: undefined,
+            disabled: false,
             color: 'default',
             size: 'medium',
             edge: false,
@@ -45,12 +50,13 @@ export const useIconButton = (params: ComponentParams<Struct>): Component<Struct
         view: () => (
             <MuiIconButton
                 onClick={m.onClick}
+                title={m.title}
                 color={m.color}
                 size={m.size}
                 edge={m.edge}
                 loading={m.loading}
-                disabled={m.$.isDisabled}
-                aria-label={m['aria-label']}
+                disabled={m.disabled || m.$.isDisabled}
+                aria-label={m['aria-label'] || m.title}
                 sx={m.sx}
             >
                 {m.icon}

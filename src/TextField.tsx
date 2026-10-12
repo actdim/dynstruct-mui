@@ -8,6 +8,7 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentStruct<
@@ -15,11 +16,13 @@ type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentS
     {
         props: {
             value: string;
-            onChange: (value: string) => void;
+            onChange?: (value: string) => void;
             label?: string;
             placeholder?: string;
             helperText?: string;
             error?: boolean;
+            disabled?: boolean;
+            required?: boolean;
             type?: string;
             multiline?: boolean;
             rows?: number;
@@ -27,7 +30,9 @@ type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentS
             variant?: MuiTextFieldProps['variant'];
             size?: MuiTextFieldProps['size'];
             color?: MuiTextFieldProps['color'];
+            slotProps?: MuiTextFieldProps['slotProps'];
             sx?: MuiTextFieldProps['sx'];
+            onKeyDown?: (event: React.KeyboardEvent) => void;
         };
     }
 >;
@@ -40,11 +45,13 @@ export const useTextField = (params: ComponentParams<Struct>): Component<Struct>
         regType: 'TextField',
         props: {
             value: '',
-            onChange: () => {},
+            onChange: undefined,
             label: undefined,
             placeholder: undefined,
             helperText: undefined,
             error: false,
+            disabled: false,
+            required: false,
             type: 'text',
             multiline: false,
             rows: undefined,
@@ -52,16 +59,26 @@ export const useTextField = (params: ComponentParams<Struct>): Component<Struct>
             variant: 'outlined',
             size: 'medium',
             color: 'primary',
+            // MUI slot props may hold React content (e.g. input.endAdornment): stored by reference
+            slotProps: prop({ reactive: 'ref' }),
             sx: undefined,
+            onKeyDown: undefined,
         },
         view: () => (
             <MuiTextField
                 value={m.value}
-                onChange={(e) => m.onChange(e.target.value)}
+                onChange={(e) => {
+                    m.value = e.target.value;
+                    if (m.onChange) {
+                        m.onChange(e.target.value);
+                    }
+                }}
+                onKeyDown={m.onKeyDown}
                 label={m.label}
                 placeholder={m.placeholder}
                 helperText={m.helperText}
                 error={m.error}
+                required={m.required}
                 type={m.type}
                 multiline={m.multiline}
                 rows={m.rows}
@@ -69,8 +86,14 @@ export const useTextField = (params: ComponentParams<Struct>): Component<Struct>
                 variant={m.variant}
                 size={m.size}
                 color={m.color}
-                disabled={m.$.isDisabled}
-                slotProps={{ input: { readOnly: m.$.isReadOnly } }}
+                disabled={m.disabled || m.$.isDisabled}
+                slotProps={{
+                    ...m.slotProps,
+                    input: {
+                        readOnly: m.$.isReadOnly,
+                        ...m.slotProps?.input,
+                    },
+                }}
                 sx={m.sx}
             />
         ),

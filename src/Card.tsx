@@ -14,6 +14,7 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentStruct<
@@ -39,12 +40,12 @@ export const useCard = (params: ComponentParams<Struct>): Component<Struct> => {
     const def: ComponentDef<Struct> = {
         regType: 'Card',
         props: {
-            content: () => null,
-            title: undefined,
-            subheader: undefined,
-            avatar: undefined,
-            headerAction: undefined,
-            actions: undefined,
+            content: prop({ initialValue: () => null, reactive: 'ref' }),
+            title: prop({ reactive: 'ref' }),
+            subheader: prop({ reactive: 'ref' }),
+            avatar: prop({ reactive: 'ref' }),
+            headerAction: prop({ reactive: 'ref' }),
+            actions: prop({ reactive: 'ref' }),
             raised: false,
             sx: undefined,
         },

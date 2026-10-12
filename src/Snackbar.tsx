@@ -11,6 +11,7 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentStruct<
@@ -40,7 +41,7 @@ export const useSnackbar = (params: ComponentParams<Struct>): Component<Struct> 
             message: '',
             autoHideDuration: 4000,
             anchorOrigin: { vertical: 'bottom', horizontal: 'left' },
-            action: undefined,
+            action: prop({ reactive: 'ref' }),
             sx: undefined,
         },
         view: () => (

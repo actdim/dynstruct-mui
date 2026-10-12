@@ -8,6 +8,7 @@ import {
     type ComponentModel,
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
+import { prop } from '@actdim/dynstruct/componentModel/core';
 import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
 
 type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentStruct<
@@ -32,7 +33,7 @@ export const useAvatar = (params: ComponentParams<Struct>): Component<Struct> =>
         props: {
             src: undefined,
             alt: undefined,
-            children: undefined,
+            children: prop({ reactive: 'ref' }),
             variant: 'circular',
             sx: undefined,
         },

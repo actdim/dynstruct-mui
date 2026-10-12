@@ -27,11 +27,12 @@ type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentS
     {
         props: {
             value: string;
-            onChange: (value: string) => void;
+            onChange?: (value: string) => void;
             options: SelectOption[];
             label?: string;
             helperText?: string;
             error?: boolean;
+            disabled?: boolean;
             fullWidth?: boolean;
             variant?: MuiSelectProps['variant'];
             size?: MuiSelectProps['size'];
@@ -49,11 +50,12 @@ export const useSelect = (params: ComponentParams<Struct>): Component<Struct> =>
         regType: 'Select',
         props: {
             value: '',
-            onChange: () => {},
+            onChange: undefined,
             options: [],
             label: undefined,
             helperText: undefined,
             error: false,
+            disabled: false,
             fullWidth: false,
             variant: 'outlined',
             size: 'medium',
@@ -69,7 +71,7 @@ export const useSelect = (params: ComponentParams<Struct>): Component<Struct> =>
                     variant={m.variant}
                     size={m.size}
                     error={m.error}
-                    disabled={m.$.isDisabled}
+                    disabled={m.disabled || m.$.isDisabled}
                     sx={m.sx}
                 >
                     {m.label && <InputLabel id={labelId}>{m.label}</InputLabel>}
@@ -77,7 +79,13 @@ export const useSelect = (params: ComponentParams<Struct>): Component<Struct> =>
                         labelId={m.label ? labelId : undefined}
                         label={m.label}
                         value={m.value}
-                        onChange={(e) => m.onChange(e.target.value as string)}
+                        onChange={(e) => {
+                            const val = e.target.value as string;
+                            m.value = val;
+                            if (m.onChange) {
+                                m.onChange(val);
+                            }
+                        }}
                         color={m.color}
                         inputProps={{ readOnly: m.$.isReadOnly }}
                     >
