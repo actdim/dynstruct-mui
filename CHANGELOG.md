@@ -2,6 +2,14 @@
 
 All notable changes to `@actdim/dynstruct-mui` are documented here. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.8.3] - 2026-10-13
+
+### Fixed
+- ESLint configuration repaired and Autocomplete slotProps documentation updated.
+
+### Changed
+- Bump patch version to 1.8.3, synchronize workspace dependencies and Along protocol v4.4.12 metadata.
+
 ## [1.8.2] - 2026-10-11
 
 ### Fixed
