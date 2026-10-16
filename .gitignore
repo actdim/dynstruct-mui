@@ -138,6 +138,11 @@ storybook-static
 *.local
 *.private
 
+# VitePress
+.dist-docs/
+docs/.vitepress/dist
+docs/.vitepress/cache
+
 # Python bytecode cache (Along lifecycle scripts)
 __pycache__/
 *.pyc
