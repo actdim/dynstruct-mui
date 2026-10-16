@@ -17,8 +17,15 @@ parent: task--release-v1-8-2
 
 # Release v1.8.2 (child of root task--release-v1-8-2)
 
-Describe the feature, requirements, and background context here.
+## Problem Statement / Background
+Coordinated release v1.8.2 for @actdim/dynstruct-mui including component updates and version bump.
+
+## Implementation Details
+1. Bumped package version to 1.8.2 in package.json.
+2. Updated peerDependencies for @actdim/dynstruct to >=1.8.2.
+3. Verified build and tests.
 
 ## Acceptance Criteria
-- [ ] Task requirement 1
-- [ ] Automated tests passing
+- [x] Version 1.8.2 set in package.json
+- [x] Dependencies and peer dependencies aligned
+- [x] Build and test artifacts verified
