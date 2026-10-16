@@ -4,7 +4,7 @@
 - [ ] `(bug)` [button-default-variant-text](ISSUES/bug--button-default-variant-text.md)
 
 ## Backlog
-<!-- No backlog issues -->
+- [ ] `(task)` [agent-native-component-registry](ISSUES/task--agent-native-component-registry.md)
 
 ## Done (recent)
 - [x] `(task)` [separate-docs-and-vitepress-build](ISSUES/done/task--separate-docs-and-vitepress-build.md)
