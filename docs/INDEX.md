@@ -19,7 +19,7 @@ flowchart TD
     INDEX["Knowledge Base (INDEX)"]
     T_ARCHITECTURE["01 Architecture"]
     INDEX --> T_ARCHITECTURE
-    T_DEPENDENCIES["Dependencies & AI Documentation for @actdim/dynstruct-mui"]
+    T_DEPENDENCIES["Dependencies & Submodules AI Documentation and Rules"]
     INDEX --> T_DEPENDENCIES
     T_DOMAIN_MODEL["02 Domain Model"]
     INDEX --> T_DOMAIN_MODEL
@@ -38,7 +38,7 @@ flowchart TD
 ## Articles
 
 - **[01 Architecture](./topic--architecture.md)** (topic) `architecture`
-- **[Dependencies & AI Documentation for @actdim/dynstruct-mui](./topic--dependencies.md)** (topic) `dependencies`, `subproject`, `ai-context`, `rules`
+- **[Dependencies & Submodules AI Documentation and Rules](./topic--dependencies.md)** (topic) `dependencies`, `ai-context`, `submodules`, `vendor`, `rules`
 - **[02 Domain Model](./topic--domain-model.md)** (topic) `domain-model`
 - **[03 Setup And Workflow](./topic--setup-and-workflow.md)** (topic) `setup-and-workflow`
 
