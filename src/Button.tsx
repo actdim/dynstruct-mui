@@ -9,14 +9,20 @@ import {
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
 import { prop } from '@actdim/dynstruct/componentModel/core';
-import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
+import { type BaseAppMsgStruct, type BaseAppMsgChannels } from '@actdim/dynstruct/appDomain/appContracts';
+import { handleNavLinkClick } from '@actdim/dynstruct/services/react/NavLink';
 
 type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentStruct<
     TMsgStruct,
     {
         props: {
             label: React.ReactNode;
-            onClick: () => void;
+            onClick: (e: React.MouseEvent<HTMLElement>) => void;
+            /** Renders a link: plain click navigates in place (APP.NAV.GOTO), modified / middle click opens natively */
+            href?: string;
+            target?: string;
+            /** Called before an in-place link navigation (plain click on `href` only) */
+            onNavigate?: () => void;
             variant?: MuiButtonProps['variant'];
             color?: MuiButtonProps['color'];
             size?: MuiButtonProps['size'];
@@ -26,6 +32,10 @@ type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentS
             loading?: boolean;
             disabled?: boolean;
             sx?: MuiButtonProps['sx'];
+        };
+        msgScope: {
+            // href links navigate through the bus
+            publish: BaseAppMsgChannels<'APP.NAV.GOTO'>;
         };
     }
 >;
@@ -39,6 +49,9 @@ export const useButton = (params: ComponentParams<Struct>): Component<Struct> =>
         props: {
             label: prop({ initialValue: '', reactive: 'ref' }),
             onClick: () => {},
+            href: undefined,
+            target: undefined,
+            onNavigate: undefined,
             variant: 'text',
             color: 'primary',
             size: 'medium',
@@ -60,7 +73,12 @@ export const useButton = (params: ComponentParams<Struct>): Component<Struct> =>
                 startIcon={m.startIcon}
                 endIcon={m.endIcon}
                 sx={m.sx}
-                onClick={m.onClick}
+                href={m.href}
+                target={m.target}
+                onClick={(e: React.MouseEvent<HTMLElement>) => {
+                    m.onClick(e);
+                    handleNavLinkClick(e, c.msgBus, m.href, { target: m.target, onNavigate: m.onNavigate });
+                }}
             >
                 {m.label}
             </MuiButton>

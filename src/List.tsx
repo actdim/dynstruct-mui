@@ -17,13 +17,16 @@ import {
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
 import { prop } from '@actdim/dynstruct/componentModel/core';
-import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
+import { type BaseAppMsgStruct, type BaseAppMsgChannels } from '@actdim/dynstruct/appDomain/appContracts';
+import { handleNavLinkClick } from '@actdim/dynstruct/services/react/NavLink';
 
 export type ListItemDef = {
     primary: React.ReactNode;
     secondary?: React.ReactNode;
     icon?: React.FC;
-    onClick?: () => void;
+    onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+    /** Renders the item as a link (plain click navigates in place, modified / middle click opens natively) */
+    href?: string;
     divider?: boolean;
     disabled?: boolean;
 };
@@ -36,6 +39,10 @@ type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentS
             dense?: boolean;
             disablePadding?: boolean;
             sx?: MuiListProps['sx'];
+        };
+        msgScope: {
+            // href links navigate through the bus
+            publish: BaseAppMsgChannels<'APP.NAV.GOTO'>;
         };
     }
 >;
@@ -58,9 +65,16 @@ export const useList = (params: ComponentParams<Struct>): Component<Struct> => {
                 {m.items.map((item, i) =>
                     item.divider ? (
                         <Divider key={i} component="li" />
-                    ) : item.onClick ? (
+                    ) : item.onClick || item.href ? (
                         <ListItem key={i} disablePadding>
-                            <ListItemButton onClick={item.onClick} disabled={item.disabled}>
+                            <ListItemButton
+                                {...(item.href ? { component: 'a' as const, href: item.href } : {})}
+                                onClick={(e: React.MouseEvent<HTMLElement>) => {
+                                    item.onClick?.(e);
+                                    handleNavLinkClick(e, c.msgBus, item.href);
+                                }}
+                                disabled={item.disabled}
+                            >
                                 {item.icon && (
                                     <ListItemIcon>
                                         <item.icon />

@@ -16,13 +16,16 @@ import {
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
 import { prop } from '@actdim/dynstruct/componentModel/core';
-import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
+import { type BaseAppMsgStruct, type BaseAppMsgChannels } from '@actdim/dynstruct/appDomain/appContracts';
+import { handleNavLinkClick } from '@actdim/dynstruct/services/react/NavLink';
 
 export type MenuItemDef = {
     id?: string;
     label: React.ReactNode;
     icon?: React.ReactNode;
-    onClick?: () => void;
+    onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+    /** Renders the item as a link (plain click navigates in place, modified / middle click opens natively) */
+    href?: string;
     disabled?: boolean;
     divider?: boolean;
 };
@@ -37,6 +40,10 @@ type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentS
             anchorEl?: HTMLElement | null;
             anchorPosition?: { top: number; left: number };
             sx?: MuiMenuProps['sx'];
+        };
+        msgScope: {
+            // href links navigate through the bus
+            publish: BaseAppMsgChannels<'APP.NAV.GOTO'>;
         };
     }
 >;
@@ -76,10 +83,12 @@ export const useMenu = (params: ComponentParams<Struct>): Component<Struct> => {
                         return (
                             <MuiMenuItem
                                 key={item.id ?? i}
-                                onClick={() => {
+                                {...(item.href ? { component: 'a' as const, href: item.href } : {})}
+                                onClick={(e: React.MouseEvent<HTMLElement>) => {
                                     if (item.onClick) {
-                                        item.onClick();
+                                        item.onClick(e);
                                     }
+                                    handleNavLinkClick(e, c.msgBus, item.href);
                                     m.onClose();
                                 }}
                                 disabled={item.disabled}

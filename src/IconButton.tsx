@@ -9,13 +9,19 @@ import {
 } from '@actdim/dynstruct/componentModel/contracts';
 import { useComponent, toReact } from '@actdim/dynstruct/componentModel/react/hooks';
 import { prop } from '@actdim/dynstruct/componentModel/core';
-import { type BaseAppMsgStruct } from '@actdim/dynstruct/appDomain/appContracts';
+import { type BaseAppMsgStruct, type BaseAppMsgChannels } from '@actdim/dynstruct/appDomain/appContracts';
+import { handleNavLinkClick } from '@actdim/dynstruct/services/react/NavLink';
 
 type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentStruct<
     TMsgStruct,
     {
         props: {
-            onClick: () => void;
+            onClick: (e: React.MouseEvent<HTMLElement>) => void;
+            /** Renders a link: plain click navigates in place (APP.NAV.GOTO), modified / middle click opens natively */
+            href?: string;
+            target?: string;
+            /** Called before an in-place link navigation (plain click on `href` only) */
+            onNavigate?: () => void;
             icon: React.ReactNode;
             title?: string;
             disabled?: boolean;
@@ -25,6 +31,10 @@ type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentS
             loading?: boolean;
             'aria-label'?: string;
             sx?: MuiIconButtonProps['sx'];
+        };
+        msgScope: {
+            // href links navigate through the bus
+            publish: BaseAppMsgChannels<'APP.NAV.GOTO'>;
         };
     }
 >;
@@ -37,6 +47,9 @@ export const useIconButton = (params: ComponentParams<Struct>): Component<Struct
         regType: 'IconButton',
         props: {
             onClick: () => {},
+            href: undefined,
+            target: undefined,
+            onNavigate: undefined,
             icon: prop({ initialValue: null, reactive: 'ref' }),
             title: undefined,
             disabled: false,
@@ -49,7 +62,11 @@ export const useIconButton = (params: ComponentParams<Struct>): Component<Struct
         },
         view: () => (
             <MuiIconButton
-                onClick={m.onClick}
+                {...(m.href ? { href: m.href, target: m.target } : {})}
+                onClick={(e: React.MouseEvent<HTMLElement>) => {
+                    m.onClick(e);
+                    handleNavLinkClick(e, c.msgBus, m.href, { target: m.target, onNavigate: m.onNavigate });
+                }}
                 title={m.title}
                 color={m.color}
                 size={m.size}
