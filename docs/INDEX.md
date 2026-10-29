@@ -4,7 +4,7 @@ slug: INDEX
 title: '@actdim/dynstruct-mui - Knowledge Base Topic Index'
 type: index
 created: 2026-09-10
-updated: 2026-10-23
+updated: 2026-10-29
 tags: [index, kb, topics, map]
 ---
 
@@ -17,6 +17,8 @@ Central entry point and cross-linked topic catalog for project documentation:
 ```mermaid
 flowchart TD
     INDEX["Knowledge Base (INDEX)"]
+    T_ALONG_PROTOCOL["Along Protocol Reference"]
+    INDEX --> T_ALONG_PROTOCOL
     T_ARCHITECTURE["01 Architecture"]
     INDEX --> T_ARCHITECTURE
     T_DEPENDENCIES["Dependencies & Submodules AI Documentation and Rules"]
@@ -37,6 +39,7 @@ flowchart TD
 
 ## Articles
 
+- **[Along Protocol Reference](./topic--along-protocol.md)** (reference) `protocol`, `agents-md`, `checklist`, `routing`, `concurrency`, `along-team`, `conventions`
 - **[01 Architecture](./topic--architecture.md)** (topic) `architecture`
 - **[Dependencies & Submodules AI Documentation and Rules](./topic--dependencies.md)** (topic) `dependencies`, `ai-context`, `submodules`, `vendor`, `rules`
 - **[02 Domain Model](./topic--domain-model.md)** (topic) `domain-model`

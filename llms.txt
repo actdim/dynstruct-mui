@@ -6,6 +6,7 @@
 - [README.md](README.md): Overview, quick installation, and full skill list.
 - [AGENTS.md](AGENTS.md): Active ALONG-PROTOCOL conventions and instructions.
 - [docs/INDEX.md](docs/INDEX.md): Central Knowledge Base topic catalog.
+- [docs/topic--along-protocol.md](docs/topic--along-protocol.md): Along Protocol Reference.
 - [docs/topic--architecture.md](docs/topic--architecture.md): 01 Architecture.
 - [docs/topic--dependencies.md](docs/topic--dependencies.md): Dependencies & Submodules AI Documentation and Rules.
 - [docs/topic--domain-model.md](docs/topic--domain-model.md): 02 Domain Model.
