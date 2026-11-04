@@ -5,6 +5,7 @@
 
 ## Backlog
 - [ ] `(task)` [agent-native-component-registry](ISSUES/task--agent-native-component-registry.md)
+- [ ] `(task)` [package-root-export](ISSUES/task--package-root-export.md) - plan ready
 
 ## Done (recent)
 - [x] `(feat)` [href-link-controls](ISSUES/done/feat--href-link-controls.md)
