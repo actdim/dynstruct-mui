@@ -3,10 +3,11 @@ protocol: along
 protocol_version: "4.6.0"
 slug: package-root-export
 type: task
-status: open
+status: done
+completed: 2026-11-05
 priority: high
 created: 2026-11-03
-updated: 2026-11-04
+updated: 2026-11-05
 agent: claude-code
 tags: [packaging, exports, typescript]
 parent: task--package-exports-and-paths
@@ -32,5 +33,5 @@ with tsconfig `paths` to `dist/index.d.ts` and a vitest alias to `dist/index.es.
 1. Add the entry; build; check that bare and subpath imports resolve (Node `import.meta.resolve`, tsc trace).
 
 ## Acceptance Criteria
-- [ ] `"."` export present; `pnpm --filter @actdim/dynstruct-mui build`, `test`, `lint` green.
-- [ ] Bare import resolves to `dist/index.es.js` / `dist/index.d.ts` without `paths` or aliases.
+- [x] `"."` export present; `pnpm --filter @actdim/dynstruct-mui build`, `test`, `lint` green.
+- [x] Bare import resolves to `dist/index.es.js` / `dist/index.d.ts` without `paths` or aliases.
