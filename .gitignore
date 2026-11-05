@@ -146,3 +146,10 @@ docs/.vitepress/cache
 # Python bytecode cache (Along lifecycle scripts)
 __pycache__/
 *.pyc
+
+
+# Along runtime
+.along/dashboard.html
+.along/DASHBOARD.md
+.along/.session/
+.along/diagnostics/
