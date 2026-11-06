@@ -66,7 +66,7 @@ export const useDialog = (params: ComponentParams<Struct>): Component<Struct> =>
                     <DialogTitle>
                         <div>{m.title}</div>
                         {m.subtitle && (
-                            <div style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 400, marginTop: 4 }}>
+                            <div style={{ fontSize: '0.85rem', color: 'var(--color-fg-muted, #64748b)', fontWeight: 400, marginTop: 4 }}>
                                 {m.subtitle}
                             </div>
                         )}
