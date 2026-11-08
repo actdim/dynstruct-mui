@@ -4,6 +4,7 @@
 <!-- No active issues -->
 
 ## Backlog
+- [ ] `(feat)` [field-validation-binding](ISSUES/feat--field-validation-binding.md)
 - [ ] `(task)` [adopt-dev-config](ISSUES/task--adopt-dev-config.md)
 - [ ] `(task)` [agent-native-component-registry](ISSUES/task--agent-native-component-registry.md)
 
