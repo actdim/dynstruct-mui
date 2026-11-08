@@ -33,14 +33,14 @@ Consumer: Mempart webapp dialogs (`task--forms-dynstruct-validation` in the Memp
 
 ## Requirements
 - REQ-1: `TextField`, `Select`, `Autocomplete`, `Checkbox`, `Switch` and `RadioGroup` MUST declare `onBlur?: (event?: React.FocusEvent) => void` (default `undefined`) and pass it to the MUI element.
-- REQ-2: `useXxx({ ...bindField(() => c, 'path') })` MUST type-check for each of the six controls without casts.
+- REQ-2: `useXxx({ ...bindField(() => c, 'path') })` MUST type-check without casts for TextField, Select, Autocomplete and RadioGroup; Checkbox and Switch (prop `checked`) MUST accept `checked`, `error`, `helperText`, `onBlur` taken from one `bindField` result.
 - REQ-3: Existing behavior MUST NOT change when `onBlur` is not passed.
 - REQ-4: The `ContactForm` example MUST use `prop({ validator })` + `bindField` + `await c.validate()` on submit, a cross-field rule, and a simulated server error through `c.setValidation`; the duplicated rule bindings MUST go away.
 - REQ-5: Docs MUST describe the form-validation pattern (`docs/topic--architecture.md` or the forms section it links to) and `CHANGELOG.md` MUST record the new prop.
 
 ## Acceptance Criteria
-- [ ] REQ-1..REQ-3 verified by `pnpm run typecheck` (the example spreads `bindField` into each control kind it uses)
+- [ ] REQ-1..REQ-3 verified by `npx tsc -b tsconfig.json --noEmit` (the example spreads `bindField` into each control kind it uses)
 - [ ] Storybook `ContactForm`: blur on an empty field shows the error under it, submit is blocked, the simulated server error shows under its field and clears on edit (checked in the browser)
-- [ ] `pnpm run typecheck`, `pnpm run test`, `pnpm run lint`, `pnpm run build` green
+- [ ] `npx tsc -b tsconfig.json --noEmit`, `pnpm run test`, `pnpm run lint`, `pnpm run build` green
 - [ ] Released only through the monorepo-wide `pnpm run version:sync` in Mempart, after the dynstruct change
 - [ ] Detailed plan: `plans/01--field-validation-binding.md` in this issue's folder
