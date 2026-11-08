@@ -8,3 +8,4 @@ _`<YYYY-MM-DD> - <slug> - <agent> - <summary> - <relative link>`_
 2026-10-19 - fix-docs-mermaid-dependency - antigravity - Add mermaid devDependency for VitePress build in dynstruct-mui - [Session Log](./SESSIONS/2026/2026-10-19--fix-docs-mermaid-dependency.md)
 2026-10-23 - button-default-variant-text - claude-code - Closed: Button defaults to variant text and TextField forwards onKeyDown (code landed in e68b09f); acceptance criteria added and verified - [Session Log](./SESSIONS/2026/2026-10-23--button-default-variant-text.md)
 2026-11-05 - package-root-export - antigravity - exports gains the root entry - [Session Log](./SESSIONS/2026/2026-11-05--package-root-export.md)
+2026-11-08 - adopt-dev-config - claude-code - ESLint, Prettier and tsconfig on @actdim/dev-config 1.12.2 presets with no finding, rule-set or Prettier regressions; results in the issue Outcome section - [Session Log](./SESSIONS/2026/2026-11-08--adopt-dev-config.md)
