@@ -1,6 +1,6 @@
 {
     "name": "@actdim/dynstruct-mui",
-    "version": "1.12.2",
+    "version": "1.14.0",
     "description": "MUI component wrappers for @actdim/dynstruct",
     "author": "Pavel Borodaev",
     "license": "MIT",
@@ -96,9 +96,9 @@
         "docs:preview": "vitepress preview docs"
     },
     "peerDependencies": {
-        "@actdim/dynstruct": ">=1.12.2",
-        "@actdim/msgmesh": ">=1.12.2",
-        "@actdim/utico": ">=1.12.2",
+        "@actdim/dynstruct": ">=1.14.0",
+        "@actdim/msgmesh": ">=1.14.0",
+        "@actdim/utico": ">=1.14.0",
         "@emotion/react": ">=11.14.0",
         "@emotion/styled": ">=11.14.1",
         "@mui/material": ">=9.0.1",
@@ -115,7 +115,7 @@
         "uuid": ">=13.0.0"
     },
     "devDependencies": {
-        "@actdim/dev-config": ">=1.12.2",
+        "@actdim/dev-config": ">=1.14.0",
         "@faker-js/faker": "^10.4.0",
         "@storybook/addon-docs": "10.6.0",
         "@storybook/addon-onboarding": "10.6.0",

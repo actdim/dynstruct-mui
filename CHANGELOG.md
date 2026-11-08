@@ -2,6 +2,19 @@
 
 All notable changes to `@actdim/dynstruct-mui` are documented here. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.14.0] - 2026-11-08
+
+### Added
+- Package root export (`.`) added to `package.json` exports map (`#package-root-export`).
+- Field validation binding integration and plans (`#field-validation-binding`).
+
+### Fixed
+- Dialog subtitle color token aligned with `--color-fg-muted` (`#dialog-subtitle-token`).
+
+### Changed
+- Adopted `@actdim/dev-config` 1.12.2 presets for ESLint, Prettier, and tsconfig (`#adopt-dev-config`).
+- Synchronized workspace dependencies to `>=1.14.0`.
+
 ## [1.8.3] - 2026-10-13
 
 ### Fixed
