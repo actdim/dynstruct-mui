@@ -3,7 +3,7 @@ protocol: along
 protocol_version: "4.6.1"
 slug: field-validation-binding
 type: feat
-status: open
+status: in-progress
 priority: medium
 created: 2026-11-08
 updated: 2026-11-08
@@ -11,6 +11,7 @@ agent: claude
 tags: [validation, forms]
 blocked_by: []
 related: []
+plan_status: approved
 ---
 
 # Field validation binding: onBlur and error/helperText on form fields

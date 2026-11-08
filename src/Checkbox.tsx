@@ -26,6 +26,7 @@ type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentS
             label?: string;
             helperText?: string;
             error?: boolean;
+            onBlur?: (event?: React.FocusEvent) => void;
             disabled?: boolean;
             color?: MuiCheckboxProps['color'];
             size?: MuiCheckboxProps['size'];
@@ -47,6 +48,7 @@ export const useCheckbox = (params: ComponentParams<Struct>): Component<Struct> 
             label: undefined,
             helperText: undefined,
             error: false,
+            onBlur: undefined,
             disabled: false,
             color: 'primary',
             size: 'medium',
@@ -63,6 +65,7 @@ export const useCheckbox = (params: ComponentParams<Struct>): Component<Struct> 
                             m.onChange(e.target.checked);
                         }
                     }}
+                    onBlur={m.onBlur}
                     color={m.color}
                     size={m.size}
                     indeterminate={m.indeterminate}

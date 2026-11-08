@@ -32,6 +32,15 @@ tags: [architecture]
 +---------------------------------------------------------------------------------------------------+
 ```
 
+## Form validation
+
+Form validation rules live in the component's def.props (prop({ initialValue, validator })). Connect form controls with indField from @actdim/dynstruct/componentModel/core:
+- Spread ...bindField(() => c, 'name') into value controls (TextField, Select, Autocomplete, RadioGroup).
+- Pass parts (checked: f.value, error: f.error, helperText: f.helperText, onBlur: f.onBlur) into boolean controls (Checkbox, Switch).
+- Gate submission with if (!(await c.validate())) { return; }.
+
+See AGENTS.md (Form Fields and Validation) for full usage details.
+
 ## 2. Cross-Links
 - [[INDEX.md]] - Knowledge Base Root
 - [[02-[domain-model](./topic--domain-model.md).md]] - Domain Model & Component Catalog

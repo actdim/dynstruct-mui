@@ -31,6 +31,7 @@ export type AutocompleteStruct<T = any, TMsgStruct extends BaseAppMsgStruct = Ba
             placeholder?: string;
             helperText?: string;
             error?: boolean;
+            onBlur?: (event?: React.FocusEvent) => void;
             disabled?: boolean;
             loading?: boolean;
             freeSolo?: boolean;
@@ -62,6 +63,7 @@ export const useAutocomplete = <T = any>(params: ComponentParams<AutocompleteStr
             placeholder: undefined,
             helperText: undefined,
             error: false,
+            onBlur: undefined,
             disabled: false,
             loading: false,
             freeSolo: false,
@@ -123,6 +125,7 @@ export const useAutocomplete = <T = any>(params: ComponentParams<AutocompleteStr
                         placeholder={m.placeholder}
                         error={m.error}
                         helperText={m.helperText}
+                        onBlur={m.onBlur}
                         variant={m.variant}
                         slotProps={m.slotProps}
                     />

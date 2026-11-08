@@ -21,6 +21,7 @@ type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentS
             placeholder?: string;
             helperText?: string;
             error?: boolean;
+            onBlur?: (event?: React.FocusEvent) => void;
             disabled?: boolean;
             required?: boolean;
             type?: string;
@@ -50,6 +51,7 @@ export const useTextField = (params: ComponentParams<Struct>): Component<Struct>
             placeholder: undefined,
             helperText: undefined,
             error: false,
+            onBlur: undefined,
             disabled: false,
             required: false,
             type: 'text',
@@ -74,6 +76,7 @@ export const useTextField = (params: ComponentParams<Struct>): Component<Struct>
                     }
                 }}
                 onKeyDown={m.onKeyDown}
+                onBlur={m.onBlur}
                 label={m.label}
                 placeholder={m.placeholder}
                 helperText={m.helperText}

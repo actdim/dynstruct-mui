@@ -1,11 +1,10 @@
 # Active Issues
 
 ## Active
-<!-- No active issues -->
+- [ ] `(feat)` [field-validation-binding](ISSUES/feat--field-validation-binding.md)
 
 ## Backlog
 - [ ] `(bug)` [standalone-missing-peer-devdeps](ISSUES/bug--standalone-missing-peer-devdeps.md)
-- [ ] `(feat)` [field-validation-binding](ISSUES/feat--field-validation-binding.md)
 - [ ] `(task)` [agent-native-component-registry](ISSUES/task--agent-native-component-registry.md)
 
 ## Done (recent)

@@ -32,6 +32,7 @@ type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentS
             label?: string;
             helperText?: string;
             error?: boolean;
+            onBlur?: (event?: React.FocusEvent) => void;
             disabled?: boolean;
             fullWidth?: boolean;
             variant?: MuiSelectProps['variant'];
@@ -55,6 +56,7 @@ export const useSelect = (params: ComponentParams<Struct>): Component<Struct> =>
             label: undefined,
             helperText: undefined,
             error: false,
+            onBlur: undefined,
             disabled: false,
             fullWidth: false,
             variant: 'outlined',
@@ -86,6 +88,7 @@ export const useSelect = (params: ComponentParams<Struct>): Component<Struct> =>
                                 m.onChange(val);
                             }
                         }}
+                        onBlur={m.onBlur}
                         color={m.color}
                         inputProps={{ readOnly: m.$.isReadOnly }}
                     >

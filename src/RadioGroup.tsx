@@ -34,6 +34,7 @@ type Struct<TMsgStruct extends BaseAppMsgStruct = BaseAppMsgStruct> = ComponentS
             label?: string;
             helperText?: string;
             error?: boolean;
+            onBlur?: (event?: React.FocusEvent) => void;
             row?: boolean;
             color?: MuiRadioProps['color'];
             size?: MuiRadioProps['size'];
@@ -55,6 +56,7 @@ export const useRadioGroup = (params: ComponentParams<Struct>): Component<Struct
             label: undefined,
             helperText: undefined,
             error: false,
+            onBlur: undefined,
             row: false,
             color: 'primary',
             size: 'medium',
@@ -71,6 +73,7 @@ export const useRadioGroup = (params: ComponentParams<Struct>): Component<Struct
                         name={c.id}
                         value={m.value}
                         onChange={(e) => m.onChange(e.target.value)}
+                        onBlur={m.onBlur}
                         row={m.row}
                     >
                         {m.options.map((opt) => (
