@@ -1,11 +1,11 @@
 # Active Issues
 
 ## Active
-<!-- No active issues -->
+- [ ] `(task)` [adopt-dev-config](ISSUES/task--adopt-dev-config.md)
 
 ## Backlog
+- [ ] `(bug)` [standalone-missing-peer-devdeps](ISSUES/bug--standalone-missing-peer-devdeps.md)
 - [ ] `(feat)` [field-validation-binding](ISSUES/feat--field-validation-binding.md)
-- [ ] `(task)` [adopt-dev-config](ISSUES/task--adopt-dev-config.md)
 - [ ] `(task)` [agent-native-component-registry](ISSUES/task--agent-native-component-registry.md)
 
 ## Done (recent)
