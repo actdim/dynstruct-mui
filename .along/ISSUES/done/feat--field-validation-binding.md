@@ -3,7 +3,8 @@ protocol: along
 protocol_version: "4.6.1"
 slug: field-validation-binding
 type: feat
-status: in-progress
+status: done
+completed: 2026-11-08
 priority: medium
 created: 2026-11-08
 updated: 2026-11-08
@@ -40,8 +41,8 @@ Consumer: Mempart webapp dialogs (`task--forms-dynstruct-validation` in the Memp
 - REQ-5: Docs MUST describe the form-validation pattern (`docs/topic--architecture.md` or the forms section it links to) and `CHANGELOG.md` MUST record the new prop.
 
 ## Acceptance Criteria
-- [ ] REQ-1..REQ-3 verified by `npx tsc -b tsconfig.json --noEmit` (the example spreads `bindField` into each control kind it uses)
-- [ ] Storybook `ContactForm`: blur on an empty field shows the error under it, submit is blocked, the simulated server error shows under its field and clears on edit (checked in the browser)
-- [ ] `npx tsc -b tsconfig.json --noEmit`, `pnpm run test`, `pnpm run lint`, `pnpm run build` green
-- [ ] Released only through the monorepo-wide `pnpm run version:sync` in Mempart, after the dynstruct change
-- [ ] Detailed plan: `plans/01--field-validation-binding.md` in this issue's folder
+- [x] REQ-1..REQ-3 verified by `npx tsc -b tsconfig.json --noEmit` (the example spreads `bindField` into each control kind it uses)
+- [x] Storybook `ContactForm`: blur on an empty field shows the error under it, submit is blocked, the simulated server error shows under its field and clears on edit (checked in the browser)
+- [x] `npx tsc -b tsconfig.json --noEmit`, `pnpm run test`, `pnpm run lint`, `pnpm run build` green
+- [x] Released only through the monorepo-wide `pnpm run version:sync` in Mempart, after the dynstruct change
+- [x] Detailed plan: `plans/01--field-validation-binding.md` in this issue's folder

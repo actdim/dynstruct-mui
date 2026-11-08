@@ -234,6 +234,19 @@ view: () => <c.children.AddDialog />,
 - The `toReact` export (`Xxx`) is for plain React code and backward compatibility only - do not render `<Xxx prop={m.value} ... />` inline in a dynstruct `view`.
 - Full rules: `@actdim/dynstruct` AGENTS.md, "Composition and Performance Rules" and "Binding priority".
 
+## Form Fields and Validation
+
+Validation rules live in the parent's def.props (prop({ initialValue, validator }), see the dynstruct AGENTS.md validation section). Connect a field with indField from @actdim/dynstruct/componentModel/core:
+
+- value controls (TextField, Select, Autocomplete, RadioGroup): spread it,
+  useTextField({ label: 'Name', ...bindField(() => c, 'name') });
+- Checkbox / Switch (prop checked): pass the parts, checked: f.value, error: f.error, helperText: f.helperText, onBlur: f.onBlur with const f = bindField(() => c, 'agree');
+- helper text while there is no error: indField(() => c, 'slug', { hint: () => t('slugHint') });
+- submit: if (!(await c.validate())) { return; }; server field error: c.setValidation({ email: {...} });
+  reopen: c.resetValidation().
+
+All six controls accept onBlur. Select blurs when its menu opens, so it becomes touched then; its change rule re-validates on selection. Example: src/_stories/examples/ContactForm.tsx.
+
 ## Import Paths
 
 ```ts
@@ -354,6 +367,15 @@ See the following engineering guidelines:
 |  - React Exports: Standard toReact() wrappers for direct JSX usage                                |
 +---------------------------------------------------------------------------------------------------+
 ```
+
+## Form validation
+
+Form validation rules live in the component's def.props (prop({ initialValue, validator })). Connect form controls with indField from @actdim/dynstruct/componentModel/core:
+- Spread ...bindField(() => c, 'name') into value controls (TextField, Select, Autocomplete, RadioGroup).
+- Pass parts (checked: f.value, error: f.error, helperText: f.helperText, onBlur: f.onBlur) into boolean controls (Checkbox, Switch).
+- Gate submission with if (!(await c.validate())) { return; }.
+
+See AGENTS.md (Form Fields and Validation) for full usage details.
 
 ## 2. Cross-Links
 - [[INDEX.md]] - Knowledge Base Root
