@@ -6,7 +6,7 @@ All notable changes to `@actdim/dynstruct-mui` are documented here. Format: [Kee
 
 ### Added
 - Package root export (`.`) added to `package.json` exports map (`#package-root-export`).
-- Field validation binding integration and plans (`#field-validation-binding`).
+- Field validation binding: onBlur handling across TextField, SelectField, AutocompleteField, CheckboxField, SwitchField, RadioGroupField (refs #field-validation-binding).
 
 ### Fixed
 - Dialog subtitle color token aligned with `--color-fg-muted` (`#dialog-subtitle-token`).
