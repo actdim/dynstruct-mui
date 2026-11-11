@@ -74,8 +74,8 @@ export const useContactForm = (params: ComponentParams<Struct>): Component<Struc
                         !v.trim()
                             ? { isValid: false, message: 'Email is required' }
                             : EMAIL_RE.test(v)
-                              ? undefined
-                              : { isValid: false, message: 'Invalid email address' },
+                                ? undefined
+                                : { isValid: false, message: 'Invalid email address' },
                 },
             }),
             // Cross-field rule: reads the closure `m`.
@@ -114,6 +114,7 @@ export const useContactForm = (params: ComponentParams<Struct>): Component<Struc
                     const res = await fakeRegister(m.email);
                     if (!res.ok) {
                         c.setValidation({ email: { isValid: false, message: 'Email already registered' } });
+
                         return;
                     }
                     m.result = `Submitted: ${m.name} <${m.email}>, topic ${m.topic}`;

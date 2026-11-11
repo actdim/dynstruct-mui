@@ -3,7 +3,7 @@ protocol: along
 protocol_version: "4.8.0"
 slug: contactform-story-lint
 type: bug
-status: open
+status: in-progress
 priority: high
 created: 2026-11-11
 updated: 2026-11-11
@@ -11,6 +11,7 @@ agent: claude-code
 tags: [lint, ci, stories]
 blocked_by: []
 related: []
+plan_status: approved
 ---
 
 # ContactForm story breaks lint (indent, padding-line)
@@ -32,6 +33,12 @@ out-of-scope rule).
 - REQ-2: `pnpm lint` in dynstruct-mui MUST exit 0.
 
 ## Acceptance Criteria
-- [ ] dynstruct-mui `lint` exits 0.
-- [ ] Diff is whitespace and blank lines only.
-- [ ] Mempart `pnpm run ci:lint` exits 0.
+- [x] dynstruct-mui `lint` exits 0.
+- [x] Diff is whitespace and blank lines only.
+- [x] Mempart `pnpm run ci:lint` exits 0.
+
+## Outcome
+- `eslint --fix --fix-type layout` on `src/_stories/examples/ContactForm.tsx` (user's yes
+  2026-11-11). `git diff -w --ignore-blank-lines` empty. Before: lint exit 1, 3 errors. After:
+  dynstruct-mui lint and typecheck exit 0, `along test` passes, Mempart `pnpm run ci:lint` exits
+  0 (catalog parity 0 errors).
