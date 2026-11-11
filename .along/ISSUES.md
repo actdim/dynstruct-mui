@@ -4,6 +4,7 @@
 <!-- No active issues -->
 
 ## Backlog
+- [ ] `(bug)` [contactform-story-lint](ISSUES/bug--contactform-story-lint.md)
 - [ ] `(bug)` [standalone-missing-peer-devdeps](ISSUES/bug--standalone-missing-peer-devdeps.md)
 - [ ] `(task)` [agent-native-component-registry](ISSUES/task--agent-native-component-registry.md)
 
